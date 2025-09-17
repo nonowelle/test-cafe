@@ -15,8 +15,13 @@ import Hero from './components/Hero.vue';
 
 <style lang="scss" scoped>
 header {
+
+  z-index: 1000;
+  background: var(--color-background, #fff);
+  width: 100%;
+  height: 80px;
   line-height: 1.5;
-  max-height: 100vh;
+  margin-bottom: 2rem;
 }
 
 .logo {
@@ -33,11 +38,7 @@ header {
 
 
 @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
 
-  }
 
   .logo {
     margin: 0 2rem 0 0;

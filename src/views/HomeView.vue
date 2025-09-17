@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import About from '../components/About.vue'
 import Hero from '../components/Hero.vue';
 </script>
 
 <template>
   <main>
     <Hero />
-    <TheWelcome />
+    <About />
   </main>
 </template>
 
@@ -14,6 +14,6 @@ import Hero from '../components/Hero.vue';
 main {
   display: flex;
   flex-direction: row;
-  gap: 6rem;
+  gap: 2rem;
 }
 </style>
