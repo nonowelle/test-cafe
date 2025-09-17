@@ -7,7 +7,7 @@
 <template>
   <div class="about">
     <h2>Qué hacemos?</h2>
-    <img alt="Cafe Filo logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Cafe Filo logo" class="logo" src="@/assets/coffee-logo.svg" width="125" height="125" />
   </div>
 
 </template>
