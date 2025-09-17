@@ -16,7 +16,7 @@
 .about {
   width: 100%;
   display: flex;
-  flex-direction: column;
+
   gap: 2rem;
   border: 1px solid var(--color-border);
   border-radius: 8px;
@@ -25,5 +25,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-direction: column;
+
 }
 </style>

@@ -13,7 +13,13 @@ import Hero from '../components/Hero.vue';
 <style scoped>
 main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 2rem;
+}
+
+@media screen and (min-width: 785px) {
+  main {
+    flex-direction: row;
+  }
 }
 </style>

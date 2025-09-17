@@ -73,7 +73,7 @@
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 3rem;
     text-align: center;
 }
 
