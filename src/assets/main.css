@@ -11,13 +11,13 @@ a{
   text-decoration: none;
 
   padding: 3px;
-  transition: color ease 0.4s;
+  transition: all ease 0.4s;
 }
 
 @media (hover: hover) {
   a:hover {
     color: var(--c-purple-light);
-   
+   transform: translateY(-2px);
   }
 }
 
