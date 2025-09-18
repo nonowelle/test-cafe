@@ -6,7 +6,7 @@ import { textContent } from '@/content/textContent';
     <nav>
         <div class="first-section">
             <img class="logo" src="../assets/logo.png" alt="logo cafe philo">
-            <a href="">Cafe Philo</a>
+            <a href="" class="company">Cafe Philo</a>
         </div>
         <div class="second-section">
             <a href="">{{ textContent.navigation.what }}</a>
@@ -30,6 +30,10 @@ nav {
 
     color: var(--color-links);
     align-items: center;
+}
+
+.company {
+    font-size: 2rem;
 }
 
 .first-section {

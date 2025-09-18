@@ -5,13 +5,14 @@ import TextBanner from '../components/TextBanner.vue';
 import { textContent } from '@/content/textContent';
 
 const boxItems = textContent.boxItems;
+const textBanners = textContent.banners;
 
 </script>
 
 <template>
   <main>
-    <TextBanner />
-    <hr>
+    <TextBanner v-for="(banner, index) in textBanners" :key="index" :textBanner="banner" />
+
     <BoxItem v-for="(box, index) in boxItems" :key="index" :box="box" />
   </main>
 </template>

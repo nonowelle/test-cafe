@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { textContent } from '@/content/textContent';
+
+interface TextContentProps {
+    textBanner: {
+        title: string;
+        subtitle: string;
+        description: string;
+    }
+}
+
+defineProps<TextContentProps>();
 </script>
 
 <template>
     <div class="text-banner">
-        <h2>{{ textContent.banner.title }} <br><br>{{ textContent.banner.subtitle }}</h2>
-        <p>{{ textContent.banner.description }}</p>
+        <h2>{{ textBanner.title }} <br><br>{{ textBanner.subtitle }}</h2>
+        <p>{{ textBanner.description }}</p>
     </div>
 </template>
 
@@ -16,5 +26,11 @@ import { textContent } from '@/content/textContent';
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    border-top: 1px solid var(--color-links);
+
+    &:nth-of-type(2) {
+        border-bottom: 1px solid var(--color-links);
+    }
+
 }
 </style>
