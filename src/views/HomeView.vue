@@ -15,6 +15,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 @media screen and (min-width: 785px) {

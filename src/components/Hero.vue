@@ -8,7 +8,7 @@
             <div class="flip__inner">
                 <div class="flip__face flip__front">
                     <div class="wrapper">
-                        <h1>Bienvenidos al café Filo!</h1>
+                        <h1>Bienvenidos al café Phil0!</h1>
                     </div>
                 </div>
                 <div class="flip__face flip__back">
@@ -22,9 +22,9 @@
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .hero {
-    width: 100%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +66,6 @@
     -webkit-backface-visibility: hidden;
 }
 
-.flip__front {}
 
 .flip__back {
     transform: rotateY(180deg);
@@ -86,5 +85,11 @@ h2 {
 p {
     font-size: 18px;
     text-align: center;
+}
+
+@media screen and (min-width: 785px) {
+    .hero {
+        width: 50%;
+    }
 }
 </style>
