@@ -8,6 +8,7 @@ import Hero from './components/Hero.vue';
 <template>
   <header>
     <Nav />
+    <hr>
   </header>
 
   <RouterView />

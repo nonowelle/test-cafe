@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { textContent } from '@/content/textContent';
+</script>
+
 <template>
     <nav>
         <div class="first-section">
@@ -5,10 +9,10 @@
             <a href="">Cafe Philo</a>
         </div>
         <div class="second-section">
-            <a href="">What?</a>
-            <a href="">How?</a>
-            <a href="">I'm in</a>
-            <a href="">Contact</a>
+            <a href="">{{ textContent.navigation.what }}</a>
+            <a href="">{{ textContent.navigation.how }}</a>
+            <a href="">{{ textContent.navigation.imIn }}</a>
+            <a href="">{{ textContent.navigation.contact }}</a>
         </div>
     </nav>
 </template>
@@ -18,19 +22,21 @@ nav {
     width: 100%;
     font-size: 18px;
     text-align: center;
-    margin-bottom: 6rem;
+
     display: flex;
     justify-content: space-between;
     background-color: var(--color-background-orange);
     border-radius: 8px;
-    padding: 2rem;
 
+    color: var(--color-links);
+    align-items: center;
 }
 
 .first-section {
     display: flex;
     font-size: 32px;
     gap: 24px;
+    align-items: center;
 
 }
 
