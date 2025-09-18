@@ -9,10 +9,10 @@ import { textContent } from '@/content/textContent';
             <a href="" class="company">Cafe Philo</a>
         </div>
         <div class="second-section">
-            <a href="">{{ textContent.navigation.what }}</a>
-            <a href="">{{ textContent.navigation.how }}</a>
-            <a href="">{{ textContent.navigation.imIn }}</a>
-            <a href="">{{ textContent.navigation.contact }}</a>
+            <a href="#what">{{ textContent.navigation.what }}</a>
+            <a href="#how">{{ textContent.navigation.how }}</a>
+            <a href="#i'min">{{ textContent.navigation.imIn }}</a>
+            <a href="#contact">{{ textContent.navigation.contact }}</a>
         </div>
     </nav>
 </template>

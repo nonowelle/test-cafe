@@ -11,9 +11,10 @@ const textBanners = textContent.banners;
 
 <template>
   <main>
-    <TextBanner v-for="(banner, index) in textBanners" :key="index" :textBanner="banner" />
+    <TextBanner v-for="(banner, index) in textBanners" :key="index" :textBanner="banner"
+      :id="banner.title.toLowerCase().replace('?', '')" />
 
-    <BoxItem v-for="(box, index) in boxItems" :key="index" :box="box" />
+    <BoxItem v-for="(box, index) in boxItems" :key="index" :box="box" :id="box.title.toLowerCase().replace(' ', '')" />
   </main>
 </template>
 

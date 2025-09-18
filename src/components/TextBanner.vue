@@ -13,7 +13,7 @@ defineProps<TextContentProps>();
 </script>
 
 <template>
-    <div class="text-banner">
+    <div class="text-banner" :id="textBanner.title">
         <h2>{{ textBanner.title }} <br><br>{{ textBanner.subtitle }}</h2>
         <p>{{ textBanner.description }}</p>
     </div>
@@ -21,6 +21,7 @@ defineProps<TextContentProps>();
 
 <style lang="scss" scoped>
 .text-banner {
+    height: 100vh;
     padding: 48px;
     display: flex;
     flex-direction: column;
