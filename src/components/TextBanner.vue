@@ -22,12 +22,13 @@ defineProps<TextContentProps>();
 <style lang="scss" scoped>
 .text-banner {
     height: 100vh;
+    width: 100%;
     padding: 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    border-top: 1px solid var(--color-links);
+    // border-top: 1px solid var(--color-links);
 
     &:nth-of-type(2) {
         border-bottom: 1px solid var(--color-links);

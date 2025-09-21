@@ -20,9 +20,10 @@ header {
   z-index: 1000;
   background: var(--color-background, #fff);
   width: 100%;
-  height: 80px;
+  height: 0;
   line-height: 1.5;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  position: relative;
 }
 
 .logo {
