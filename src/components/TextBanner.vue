@@ -6,6 +6,7 @@ interface TextContentProps {
         title: string;
         subtitle: string;
         description: string;
+        descriptionDeux: string;
     }
 }
 
@@ -16,6 +17,7 @@ defineProps<TextContentProps>();
     <div class="text-banner" :id="textBanner.title">
         <h2>{{ textBanner.title }} <br><br>{{ textBanner.subtitle }}</h2>
         <p>{{ textBanner.description }}</p>
+        <p v-if="textBanner.descriptionDeux">{{ textBanner?.descriptionDeux }}</p>
     </div>
 </template>
 
@@ -28,10 +30,11 @@ defineProps<TextContentProps>();
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    // border-top: 1px solid var(--color-links);
+    align-items: center;
 
-    &:nth-of-type(2) {
-        border-bottom: 1px solid var(--color-links);
+    p,
+    h2 {
+        max-width: 800px;
     }
 
 }

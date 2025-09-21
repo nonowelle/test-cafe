@@ -1,16 +1,15 @@
 <script setup>
 import { textContent } from '@/content/textContent';
-import { useTemplateRef, ref } from 'vue';
+import { ref } from 'vue';
 
 let isOpen = ref(false);
 
 const closeMobileNav = () => {
-    console.log('closing');
+
     isOpen.value = false;
 }
 
 const openMobileNav = () => {
-    console.log('OPENING')
     isOpen.value = true;
 }
 
@@ -22,7 +21,7 @@ const openMobileNav = () => {
         <div class="first-section">
             <div class="company">
                 <img class="logo" src="../assets/logo.png" alt="logo cafe philo">
-                <a href="" class="company">Cafe Philo</a>
+                <p class="company">Café Philo</p>
             </div>
 
             <div class="close-button" @click="closeMobileNav">X</div>
@@ -63,6 +62,7 @@ nav {
     border-radius: 8px;
 
     color: var(--color-links);
+    font-weight: 500;
     align-items: center;
 
 
@@ -141,6 +141,9 @@ nav {
     gap: 32px;
     justify-content: center;
     align-items: center;
+    margin-bottom: 0;
+    font-size: 1.4rem;
+    padding: 3px;
 }
 
 
@@ -152,6 +155,7 @@ nav {
     font-style: italic;
     gap: 1.5rem;
     flex-direction: column;
+    align-self: center;
 
     align-self: flex-start;
 
@@ -183,10 +187,8 @@ nav {
     }
 
 
-
-
     .first-section {
-        width: 50%;
+        width: 30%;
         align-self: auto;
 
     }
