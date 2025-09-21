@@ -2,25 +2,22 @@
 import { textContent } from '@/content/textContent';
 import { useTemplateRef, ref } from 'vue';
 
+let isOpen = ref(false);
+
 const closeMobileNav = () => {
     console.log('closing');
+    isOpen.value = false;
 }
 
 const openMobileNav = () => {
-    console.log('OPENING"')
-    isOpen = true;
-
-
+    console.log('OPENING')
+    isOpen.value = true;
 }
-
-const isOpen = ref(false);
-const secondSection = useTemplateRef('secondSection');
-
 
 </script>
 
 <template>
-    <nav :class="isOpen ? 'is-open' : ' '">
+    <nav :class="{ open: isOpen }">
 
         <div class="first-section">
             <div class="company">
@@ -48,7 +45,7 @@ const secondSection = useTemplateRef('secondSection');
 <style lang="scss" scoped>
 nav {
     width: 100%;
-    height: 100vh;
+
     font-size: 18px;
     text-align: center;
 
@@ -75,7 +72,9 @@ nav {
         left: -100%;
     }
 
-    &.is-open {
+    &.open {
+        height: 100vh;
+
         .close-button {
             display: flex;
             cursor: pointer;
@@ -83,6 +82,10 @@ nav {
 
         .menu-icon {
             display: none;
+        }
+
+        .second-section {
+            display: flex;
         }
     }
 
@@ -132,7 +135,7 @@ nav {
 
 
 .second-section {
-    display: flex;
+    display: none;
     justify-content: space-between;
     font-size: 32px;
     font-style: italic;
