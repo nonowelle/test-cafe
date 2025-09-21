@@ -45,7 +45,9 @@ const openMobileNav = () => {
 <style lang="scss" scoped>
 nav {
     width: 100%;
-    max-height: 0;
+    max-height: 136px;
+    height: 100vh;
+    overflow: hidden;
 
     font-size: 18px;
     text-align: center;
@@ -65,8 +67,13 @@ nav {
 
 
     border-radius: 0;
+    border-bottom: 1px solid var(--color-links);
     padding-bottom: 1rem;
-
+    transition: max-height 0.4s linear;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 36px;
 
 
     &-wrapper {
@@ -75,14 +82,9 @@ nav {
     }
 
     &.open {
-        position: fixed;
-        top: 36px;
-        left: 36px;
         max-height: 100vh;
-        height: 100vh;
         z-index: 1000;
-        width: 90%;
-        background-color: var(--color-background);
+        height: 100vh;
 
         .close-button {
             display: flex;
@@ -162,11 +164,11 @@ nav {
 @media screen and (min-width: 750px) {
     nav {
         flex-direction: row;
-        height: 80px;
+        height: 100px;
         justify-content: space-between;
         gap: 1.5rem;
 
-        max-height: 80px;
+        max-height: 100px;
 
         border-bottom: 1px solid var(--color-links);
 
