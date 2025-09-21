@@ -33,10 +33,10 @@ const openMobileNav = () => {
             </div>
         </div>
         <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
-            <a href="#what">{{ textContent.navigation.what }}</a>
-            <a href="#how">{{ textContent.navigation.how }}</a>
-            <a href="#i'min">{{ textContent.navigation.imIn }}</a>
-            <a href="#contact">{{ textContent.navigation.contact }}</a>
+            <a href="#what" @click="closeMobileNav">{{ textContent.navigation.what }}</a>
+            <a href="#how" @click="closeMobileNav">{{ textContent.navigation.how }}</a>
+            <a href="#i'min" @click="closeMobileNav">{{ textContent.navigation.imIn }}</a>
+            <a href="#contact" @click="closeMobileNav">{{ textContent.navigation.contact }}</a>
         </div>
 
     </nav>
