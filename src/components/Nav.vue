@@ -1,9 +1,26 @@
-<script setup lang="ts">
+<script setup>
 import { textContent } from '@/content/textContent';
+import { useTemplateRef, ref } from 'vue';
+
+const closeMobileNav = () => {
+    console.log('closing');
+}
+
+const openMobileNav = () => {
+    console.log('OPENING"')
+    isOpen = true;
+
+
+}
+
+const isOpen = ref(false);
+const secondSection = useTemplateRef('secondSection');
+
+
 </script>
 
 <template>
-    <nav>
+    <nav :class="isOpen ? 'is-open' : ' '">
 
         <div class="first-section">
             <div class="company">
@@ -11,9 +28,14 @@ import { textContent } from '@/content/textContent';
                 <a href="" class="company">Cafe Philo</a>
             </div>
 
-            <div class="close-button">X</div>
+            <div class="close-button" @click="closeMobileNav">X</div>
+            <div class="menu-icon" @click="openMobileNav" ref="menuIcon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <div class="second-section">
+        <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
             <a href="#what">{{ textContent.navigation.what }}</a>
             <a href="#how">{{ textContent.navigation.how }}</a>
             <a href="#i'min">{{ textContent.navigation.imIn }}</a>
@@ -52,7 +74,42 @@ nav {
         position: absolute;
         left: -100%;
     }
+
+    &.is-open {
+        .close-button {
+            display: flex;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            display: none;
+        }
+    }
+
+    .close-button {
+        display: none;
+    }
+
+    .menu-icon {
+        display: flex;
+
+        flex-direction: column;
+        cursor: pointer;
+
+
+        span {
+            display: block;
+            border-radius: 15px;
+            width: 25px;
+            height: 2px;
+            background-color: var(--color-links);
+            margin: 3px;
+            transition: all 0.4s ease;
+        }
+
+    }
 }
+
 
 
 .first-section {
@@ -102,6 +159,11 @@ nav {
     .close-button {
         display: none;
     }
+
+    .menu-icon {
+        display: none;
+    }
+
 
     .first-section {
         width: 50%;
