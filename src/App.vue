@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
+import { RouterView } from 'vue-router';
+
 import Nav from './components/Nav.vue';
-import Hero from './components/Hero.vue';
+
 </script>
 
 <template>
   <header>
     <Nav />
-
   </header>
 
   <RouterView />

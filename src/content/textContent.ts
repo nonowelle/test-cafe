@@ -27,7 +27,8 @@ export const textContent = {
   boxItems: [
     {
       title: "I'm in",
-      description: "próxima sesión en octubre",
+      subtitle: 'Reservo mi plaza',
+      description: "Próxima sesión en octubre",
     },
    
   ]

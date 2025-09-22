@@ -3,7 +3,6 @@
         <h2>{{ box.title }}</h2>
         <p v-if="box.description">{{ box.description }}</p>
         <Form />
-        <button v-if="box.cta" class="cta-button">{{ box.cta }}</button>
     </div>
 </template>
 
@@ -14,7 +13,6 @@ interface BoxItemProps {
     box: {
         title: string;
         description: string;
-        cta: string;
     };
 }
 

@@ -68,11 +68,7 @@ form {
     flex-direction: column;
     gap: 1rem;
     padding: 1.5rem;
-    border-radius: 16px;
-    background: #EDF2F4;
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
 }
 
 .form-input {
