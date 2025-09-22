@@ -32,6 +32,7 @@ defineProps<TextContentProps>();
     text-align: center;
     align-items: center;
 
+
     p,
     h2 {
         max-width: 800px;

@@ -1,12 +1,14 @@
 <template>
     <div class="box-item">
-        <h3>{{ box.title }}</h3>
+        <h2>{{ box.title }}</h2>
         <p v-if="box.description">{{ box.description }}</p>
+        <Form />
         <button v-if="box.cta" class="cta-button">{{ box.cta }}</button>
     </div>
 </template>
 
 <script setup lang="ts">
+import Form from './Form.vue'
 
 interface BoxItemProps {
     box: {
@@ -24,15 +26,15 @@ defineProps<BoxItemProps>();
 .box-item {
     padding: 1.5rem;
     border-radius: 8px;
-    flex: 1;
+
     min-width: 250px;
     justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    width: 100%;
     height: 100vh;
-
-
 }
 
 .cta-button {

@@ -28,13 +28,8 @@ export const textContent = {
     {
       title: "I'm in",
       description: "próxima sesión en octubre",
-      cta: "reservo mi plaza"
     },
-    {
-      title: "contact",
-      description: "(logo IG) @cafephilo - (logo whatsapp) 603624192",
-      cta: ""
-    }
+   
   ]
 };
 
