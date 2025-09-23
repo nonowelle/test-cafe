@@ -70,7 +70,7 @@ nav {
     border-bottom: 1px solid var(--color-links);
     padding-bottom: 1rem;
     transition: max-height 0.4s linear;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     padding: 36px;
