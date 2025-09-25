@@ -15,9 +15,9 @@ defineProps<TextContentProps>();
 
 <template>
     <div class="text-banner" :id="textBanner.title">
-        <h2>{{ textBanner.title }} <br><br>{{ textBanner.subtitle }}</h2>
+        <h2>{{ textBanner.title }} <br>{{ textBanner.subtitle }}</h2>
         <p>{{ textBanner.description }}</p>
-        <p v-if="textBanner.descriptionDeux">{{ textBanner?.descriptionDeux }}</p>
+        <p v-if="textBanner.descriptionDeux" v-html="textBanner?.descriptionDeux"></p>
     </div>
 </template>
 
@@ -35,7 +35,7 @@ defineProps<TextContentProps>();
 
     p,
     h2 {
-        max-width: 800px;
+        max-width: 80%;
     }
 
 }
