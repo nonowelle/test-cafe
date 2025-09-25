@@ -31,6 +31,7 @@ defineProps<TextContentProps>();
     justify-content: center;
     text-align: center;
     align-items: center;
+    scroll-snap-align: start;
 
 
     p,

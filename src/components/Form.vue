@@ -117,6 +117,7 @@ button[type="submit"] {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.1s ease, opacity 0.2s ease, background 0.2s ease;
+    scroll-snap-align: start;
 
     &:hover {
         opacity: 0.95;
