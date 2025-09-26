@@ -21,7 +21,7 @@ const openMobileNav = () => {
         <div class="first-section">
             <div class="company">
                 <img class="logo" src="../assets/logo.png" alt="logo cafe philo">
-                <p class="company">Café Philo</p>
+                <p class="company">caféphilo</p>
             </div>
 
             <div class="close-button" @click="closeMobileNav">X</div>
