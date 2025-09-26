@@ -43,6 +43,12 @@ function handleClick() {
     opacity 0.2s ease,
     background 0.2s ease;
     scroll-snap-align: start;
+    left: 50vw;
+    transform: translateX(-50%);
+
+    @media screen and (max-width: 680px) {
+        display: none;
+    }
 
     .animate-bounce {
         animation: bounce 1s infinite;

@@ -33,7 +33,7 @@ const sectionRefs = ref([]);
 main {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+
   flex-wrap: wrap;
 }
 
