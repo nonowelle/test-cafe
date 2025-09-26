@@ -51,7 +51,20 @@ function handleClick() {
     }
 
     .animate-bounce {
-        animation: bounce 1s infinite;
+        display: inline-block;
+        animation: yoyo 0.9s ease-in-out infinite alternate;
+        will-change: transform;
+        font-size: 0.9s;
+    }
+}
+
+@keyframes yoyo {
+    from {
+        transform: translateY(-1px);
+    }
+
+    to {
+        transform: translateY(3px);
     }
 }
 </style>
