@@ -36,6 +36,16 @@ const openMobileNav = () => {
             <a href="#how" @click="closeMobileNav">{{ textContent.navigation.how }}</a>
             <a href="#i'min" @click="closeMobileNav">{{ textContent.navigation.imIn }}</a>
             <a href="#contact" @click="closeMobileNav">{{ textContent.navigation.contact }}</a>
+            <div class="lang-switcher" href="">
+                <div class="lang">
+                    en
+                    <font-awesome-icon icon="angle-down" />
+                </div>
+
+                <div class="lang-options">es</div>
+            </div>
+
+
         </div>
 
     </nav>
@@ -46,7 +56,7 @@ nav {
     width: 100%;
     max-height: 136px;
     height: 100vh;
-    overflow: hidden;
+
 
     font-size: 18px;
     text-align: center;
@@ -161,6 +171,44 @@ nav {
 
 }
 
+.lang-switcher {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.4rem;
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        display: flex;
+    }
+
+    &:hover {
+        .lang-options {
+            display: block;
+            z-index: 100;
+            border: 1px solid var(--color-links);
+            padding: 8px 24px;
+            border-radius: 8px;
+            position: relative;
+            top: 2px;
+            background-color: var(--c-purple-light);
+            color: white;
+            font-size: 1rem;
+        }
+    }
+
+}
+
+.lang-options {
+    display: none;
+}
+
 .logo {
     max-width: 70px;
 }
@@ -195,7 +243,7 @@ nav {
 
     .second-section {
         flex-direction: row;
-        gap: 2rem;
+
         display: flex;
     }
 }
