@@ -2,7 +2,7 @@
     <form @submit.prevent="handleSubmit">
         <div class="form-input">
             <label>
-                First Name
+                Nombre
             </label>
             <input type="text" v-model="formData.firstName" />
             <span class="error" v-if="!isValidFirstName">This field is required</span>
@@ -10,7 +10,7 @@
         </div>
         <div class="form-input">
             <label>
-                Last Name
+                apellido
             </label>
             <input type="text" v-model="formData.lastName" />
             <span class="error" v-if="!isValidLastName">This field is required</span>
@@ -18,14 +18,35 @@
         </div>
         <div class="form-input">
             <label>
-                Email
+                email
             </label>
             <input type="text" v-model="formData.email" />
             <span v-if="!isValidEmail" class="error">Please enter a valid email</span>
 
         </div>
+        <fieldset class="form-input">
 
-        <button type="submit" :disabled="!isFormValid">Submit</button>
+            <div>
+                <input class="radio-button" type="radio" id="info" name="info" value="info" checked />
+                <label for="info">solo quiero info</label>
+            </div>
+
+            <div>
+                <input class="radio-button" type="radio" id="estar" name="info" value="estar" />
+                <label for="estar">quiero estar</label>
+            </div>
+
+        </fieldset>
+
+        <div class="form-input">
+            <label for="algo">cuentanos algo</label>
+
+            <textarea id="algo" name="algo" rows="5" cols="33"></textarea>
+        </div>
+
+
+
+        <button type="submit" :disabled="!isFormValid">go</button>
 
     </form>
 </template>
@@ -83,7 +104,8 @@ label {
     font-weight: 500;
 }
 
-input {
+input,
+textarea {
     width: 100%;
     padding: 0.75rem 1rem;
     margin-bottom: 6px;
@@ -101,9 +123,18 @@ input {
     }
 }
 
+fieldset {
+    border: none;
+}
+
+.radio-button {
+    width: auto;
+    margin-right: 16px;
+}
+
 .error {
     color: #b00020;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 }
 
 button[type="submit"] {
