@@ -37,16 +37,27 @@ defineProps<TextContentProps>();
 
     @media screen and (max-width: 680px) {
         height: auto;
+
     }
 
 
 
     h2 {
         max-width: 80%;
+
+        @media screen and (max-width: 1024px) {
+            max-width: none;
+
+        }
     }
 
     p {
         max-width: 60%;
+
+        @media screen and (max-width: 1024px) {
+            max-width: none;
+
+        }
     }
 
 }
