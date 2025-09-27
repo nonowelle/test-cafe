@@ -23,7 +23,7 @@ defineProps<TextContentProps>();
 
 <style lang="scss" scoped>
 .text-banner {
-    height: calc(100vh - 136px);
+    height: calc(100vh + 136px);
     width: 100%;
     padding: 48px;
     display: flex;
@@ -32,8 +32,8 @@ defineProps<TextContentProps>();
     text-align: center;
     align-items: center;
     scroll-snap-align: start;
-    position: relative;
-    top: 136px;
+    // position: relative;
+    // top: 136px;
 
     @media screen and (max-width: 680px) {
         height: auto;

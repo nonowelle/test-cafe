@@ -32,7 +32,14 @@ defineProps<BoxItemProps>();
     align-items: center;
 
     width: 100%;
-    height: 100vh;
+
+}
+
+@media screen and (min-width: 1024px) {
+    .box-item {
+        height: 100vh;
+    }
+
 }
 
 .cta-button {

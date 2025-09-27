@@ -9,7 +9,7 @@ const props = defineProps({
 
 function handleClick() {
     if (props.target) {
-        props.target.scrollIntoView({ behavior: "smooth" });
+        props.target.scrollIntoView({ behavior: "smooth", alignToTop });
     }
 }
 </script>
