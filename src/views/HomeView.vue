@@ -35,6 +35,7 @@ main {
   flex-direction: column;
 
   flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .container {
