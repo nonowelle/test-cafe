@@ -16,7 +16,8 @@ function handleClick() {
 
 <template>
     <div class="button-container">
-        <button class="button" @click="handleClick"><span class="animate-bounce">↓</span></button>
+        <button class="button" @click="handleClick"><font-awesome-icon class="animate-bounce"
+                icon="angle-down" /></button>
     </div>
 </template>
 

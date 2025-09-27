@@ -179,6 +179,11 @@ nav {
     align-items: center;
 
     font-size: 1.4rem;
+    cursor: pointer;
+
+    svg {
+        font-size: 1rem;
+    }
 
     p {
         margin: 0;
@@ -192,14 +197,15 @@ nav {
         .lang-options {
             display: block;
             z-index: 100;
-            border: 1px solid var(--color-links);
+
             padding: 8px 24px;
             border-radius: 8px;
             position: relative;
-            top: 2px;
+
             background-color: var(--c-purple-light);
             color: white;
             font-size: 1rem;
+            cursor: pointer;
         }
     }
 
