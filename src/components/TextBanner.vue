@@ -10,11 +10,13 @@ interface TextContentProps {
     }
 }
 
-defineProps<TextContentProps>();
+const props = defineProps<TextContentProps>();
+
+const bannerId = props.textBanner.title.toLowerCase().replace(/'/g, '');
 </script>
 
 <template>
-    <div class="text-banner" :id="textBanner.title">
+    <div class="text-banner" :id="bannerId">
         <h2>{{ textBanner.title }} <br>{{ textBanner.subtitle }}</h2>
         <p>{{ textBanner.description }}</p>
         <p v-if="textBanner.descriptionDeux" v-html="textBanner?.descriptionDeux"></p>

@@ -84,7 +84,7 @@ p {
 
 a {
   color: var(--color-links);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 @media  screen and (max-width: 1024px) {

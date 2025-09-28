@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSubmit">
+    <form ref="form" @submit.prevent="handleSubmit">
         <div class="form-input">
             <label>
                 Nombre
@@ -27,12 +27,11 @@
         <fieldset class="form-input">
 
             <div>
-                <input class="radio-button" type="radio" id="info" name="info" value="info" checked />
-                <label for="info">solo quiero info</label>
-            </div>
 
-            <div>
-                <input class="radio-button" type="radio" id="estar" name="info" value="estar" />
+                <input type="radio" id="info" value="info" v-model="formData.razon" />
+                <label for="info">quiero info</label>
+
+                <input type="radio" id="estar" value="estar" v-model="formData.razon" />
                 <label for="estar">quiero estar</label>
             </div>
 
@@ -41,9 +40,8 @@
         <div class="form-input">
             <label for="algo">cuentanos algo</label>
 
-            <textarea id="algo" name="algo" rows="5" cols="33"></textarea>
+            <textarea id="algo" name="algo" rows="5" cols="33" v-model="formData.text"></textarea>
         </div>
-
 
 
         <button type="submit" :disabled="!isFormValid">go</button>
@@ -53,23 +51,32 @@
 
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 
 interface FormData {
     firstName: string;
     lastName: string;
-    email: string
+    email: string;
+    razon: string;
+    text: string;
 }
 
 const formData = reactive<FormData>({
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    razon: '',
+    text: ''
 });
+
 
 const isValidFirstName = computed(() => formData.firstName.length > 0);
 const isValidLastName = computed(() => formData.lastName.length > 0);
-const isValidEmail = computed(() => formData.email.length > 0);
+const isValidEmail = computed(() => {
+    // Simple email validation regex
+    const email = formData.email;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+});
 const isFormValid = computed(() => isValidFirstName.value && isValidLastName.value && isValidEmail.value);
 
 const validateForm = () => {

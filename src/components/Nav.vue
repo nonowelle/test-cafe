@@ -5,12 +5,27 @@ import { ref } from 'vue';
 let isOpen = ref(false);
 
 const closeMobileNav = () => {
-
     isOpen.value = false;
 }
 
 const openMobileNav = () => {
     isOpen.value = true;
+}
+
+const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    console.log(element)
+    if (element) {
+        const elementPosition = element.offsetTop;
+        console.log(elementPosition)
+        const offsetPosition = elementPosition - 20; // Small offset to show title properly
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+    closeMobileNav();
 }
 
 </script>
@@ -32,17 +47,17 @@ const openMobileNav = () => {
             </div>
         </div>
         <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
-            <a href="#what" @click="closeMobileNav">{{ textContent.navigation.what }}</a>
-            <a href="#how" @click="closeMobileNav">{{ textContent.navigation.how }}</a>
-            <a href="#i'min" @click="closeMobileNav">{{ textContent.navigation.imIn }}</a>
-            <a href="#contact" @click="closeMobileNav">{{ textContent.navigation.contact }}</a>
+            <a href="#what" @click="scrollToSection('what')">{{ textContent.navigation.what }}</a>
+            <a href="#how" @click="scrollToSection('how')">{{ textContent.navigation.how }}</a>
+            <a href="#imin" @click="scrollToSection('imin')">{{ textContent.navigation.imIn }}</a>
+            <a href="#contact" @click="scrollToSection('contact')">{{ textContent.navigation.contact }}</a>
             <div class="lang-switcher" href="">
                 <div class="lang">
                     en
                     <font-awesome-icon icon="angle-down" />
                 </div>
 
-                <div class="lang-options">es</div>
+                <div class="lang-options"><a href="">es</a></div>
             </div>
 
 
@@ -171,6 +186,7 @@ nav {
 
 }
 
+
 .lang-switcher {
     display: flex;
     flex-direction: column;
@@ -178,8 +194,11 @@ nav {
     justify-content: center;
     align-items: center;
 
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     cursor: pointer;
+    padding: 5px;
+    transition: none;
+    position: relative;
 
     svg {
         font-size: 1rem;
@@ -198,14 +217,22 @@ nav {
             display: block;
             z-index: 100;
 
-            padding: 8px 24px;
+            padding: 8px 16px;
             border-radius: 8px;
-            position: relative;
+            position: absolute;
+            top: 50px;
 
             background-color: var(--c-purple-light);
             color: white;
             font-size: 1rem;
             cursor: pointer;
+
+            a {
+                color: white;
+                transform: none;
+                font-size: 1rem;
+                ;
+            }
         }
     }
 
@@ -222,11 +249,10 @@ nav {
 @media screen and (min-width: 750px) {
     nav {
         flex-direction: row;
-        height: 100px;
+        height: auto;
         justify-content: space-between;
         gap: 1.5rem;
-
-        max-height: 100px;
+        padding: 16px;
 
         border-bottom: 1px solid var(--color-links);
 
@@ -251,6 +277,7 @@ nav {
         flex-direction: row;
 
         display: flex;
+        align-self: auto;
     }
 }
 </style>

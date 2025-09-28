@@ -19,7 +19,7 @@ const sectionRefs = ref([]);
 
     <TextBanner v-for="(banner, index) in textBanners" :key="index" :textBanner="banner"
       :id="banner.title.toLowerCase().replace('?', '')" />
-    <BoxItem v-for="(box, index) in boxItems" :key="index" :box="box" :id="box.title.toLowerCase().replace(' ', '')" />
+    <BoxItem v-for="(box, index) in boxItems" :key="index" :box="box" />
     <ScrollButton />
 
 

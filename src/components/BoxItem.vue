@@ -1,5 +1,5 @@
 <template>
-    <div class="box-item">
+    <div class="box-item" :id="bannerId">
         <h2>{{ box.title }}</h2>
         <p v-if="box.description">{{ box.description }}</p>
         <Form />
@@ -16,7 +16,9 @@ interface BoxItemProps {
     };
 }
 
-defineProps<BoxItemProps>();
+const props = defineProps<BoxItemProps>();
+const bannerId = props.box.title.toLowerCase().replace(/'/g, '').replace(" ", "");
+console.log(bannerId)
 
 </script>
 
