@@ -1,23 +1,62 @@
 <script setup>
+import { onMounted, onUnmounted, ref } from 'vue';
 
-const props = defineProps({
-    target: {
-        type: HTMLElement,
-        required: true,
-    },
-});
+const isVisible = ref(true);
+
+function getSections() {
+    const nodeList = document.querySelectorAll('section');
+    return Array.from(nodeList);
+}
+
+function evaluateVisibility() {
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const sections = getSections();
+    if (!sections.length) {
+        isVisible.value = false;
+        return;
+    }
+
+    const next = sections
+        .map((el) => ({ el, top: el instanceof HTMLElement ? el.offsetTop : 0 }))
+        .filter((item) => item.top > scrollTop + 5)
+        .sort((a, b) => a.top - b.top)[0];
+
+    // Show only if there is a section below current viewport
+    isVisible.value = Boolean(next);
+}
 
 function handleClick() {
-    if (props.target) {
-        props.target.scrollIntoView({ behavior: "smooth", alignToTop });
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const sections = getSections();
+    const next = sections
+        .map((el) => ({ el, top: el instanceof HTMLElement ? el.offsetTop : 0 }))
+        .filter((item) => item.top > scrollTop + 200)
+        .sort((a, b) => a.top - b.top)[0];
+
+    if (next && next.el) {
+        next.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    window.setTimeout(evaluateVisibility, 50);
 }
+
+onMounted(() => {
+    evaluateVisibility();
+    window.addEventListener('scroll', evaluateVisibility, { passive: true });
+    window.addEventListener('resize', evaluateVisibility, { passive: true });
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', evaluateVisibility);
+    window.removeEventListener('resize', evaluateVisibility);
+});
 </script>
 
 <template>
-    <div class="button-container">
-        <button class="button" @click="handleClick"><font-awesome-icon class="animate-bounce"
-                icon="angle-down" /></button>
+    <div class="button-container" v-show="isVisible">
+        <button class="button" @click="handleClick">
+            <font-awesome-icon class="animate-bounce" icon="angle-down" />
+        </button>
     </div>
 </template>
 

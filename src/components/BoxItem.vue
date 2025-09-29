@@ -1,9 +1,9 @@
 <template>
-    <div class="box-item" :id="bannerId">
+    <section class="box-item" :id="bannerId">
         <h2>{{ box.title }}</h2>
         <p v-if="box.description">{{ box.description }}</p>
         <Form />
-    </div>
+    </section>
 </template>
 
 <script setup lang="ts">

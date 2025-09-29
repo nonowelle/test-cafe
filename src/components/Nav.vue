@@ -18,7 +18,7 @@ const scrollToSection = (sectionId) => {
     if (element) {
         const elementPosition = element.offsetTop;
         console.log(elementPosition)
-        const offsetPosition = elementPosition - 20; // Small offset to show title properly
+        const offsetPosition = elementPosition; // Small offset to show title properly
 
         window.scrollTo({
             top: offsetPosition,

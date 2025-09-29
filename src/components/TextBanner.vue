@@ -16,11 +16,11 @@ const bannerId = props.textBanner.title.toLowerCase().replace(/'/g, '');
 </script>
 
 <template>
-    <div class="text-banner" :id="bannerId">
+    <section class="text-banner" :id="bannerId">
         <h2>{{ textBanner.title }} <br>{{ textBanner.subtitle }}</h2>
         <p>{{ textBanner.description }}</p>
         <p v-if="textBanner.descriptionDeux" v-html="textBanner?.descriptionDeux"></p>
-    </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
