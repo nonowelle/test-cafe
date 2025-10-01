@@ -1,6 +1,6 @@
 <script setup>
 import { textContent } from '@/content/textContent';
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 
 let isOpen = ref(false);
 
@@ -12,20 +12,16 @@ const openMobileNav = () => {
     isOpen.value = true;
 }
 
-const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    console.log(element)
-    if (element) {
-        const elementPosition = element.offsetTop;
-        console.log(elementPosition)
-        const offsetPosition = elementPosition; // Small offset to show title properly
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-    }
+const scrollToSection = async (sectionId) => {
     closeMobileNav();
+
+    await nextTick();
+
+    const element = document.getElementById(sectionId);
+    if (element) {
+        console.log(element)
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
 
 </script>

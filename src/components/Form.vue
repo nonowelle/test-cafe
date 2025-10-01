@@ -81,7 +81,7 @@ const isValidEmail = () => {
     const email = formData.email;
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
-const isFormValid = computed(() => isValidFirstName.value && isValidLastName.value && isValidEmail.value);
+const isFormValid = computed(() => isValidFirstName() && isValidLastName() && isValidEmail());
 
 const validateForm = () => {
 

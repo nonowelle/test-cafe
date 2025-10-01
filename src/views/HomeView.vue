@@ -3,6 +3,7 @@
 import BoxItem from '@/components/BoxItem.vue';
 import TextBanner from '../components/TextBanner.vue';
 import ScrollButton from '@/components/ScrollButton.vue';
+import Contact from '@/components/Contact.vue';
 import { ref } from 'vue';
 
 import { textContent } from '@/content/textContent';
@@ -21,6 +22,7 @@ const sectionRefs = ref([]);
       :id="banner.title.toLowerCase().replace('?', '')" />
     <BoxItem v-for="(box, index) in boxItems" :key="index" :box="box" />
     <ScrollButton />
+    <Contact />
 
 
 
@@ -30,14 +32,6 @@ const sectionRefs = ref([]);
 </template>
 
 <style scoped>
-main {
-  display: flex;
-  flex-direction: column;
-
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
 .container {
   position: relative;
 

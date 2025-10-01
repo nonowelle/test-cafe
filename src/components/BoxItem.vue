@@ -17,7 +17,11 @@ interface BoxItemProps {
 }
 
 const props = defineProps<BoxItemProps>();
-const bannerId = props.box.title.toLowerCase().replace(/'/g, '').replace(" ", "");
+// Normalize title into a safe, predictable id used by nav anchors
+const bannerId = props.box.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '')
+    .trim();
 console.log(bannerId)
 
 </script>

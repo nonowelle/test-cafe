@@ -12,7 +12,11 @@ interface TextContentProps {
 
 const props = defineProps<TextContentProps>();
 
-const bannerId = props.textBanner.title.toLowerCase().replace(/'/g, '');
+// Normalize title into a safe, predictable id used by nav anchors
+const bannerId = props.textBanner.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '')
+    .trim();
 </script>
 
 <template>
