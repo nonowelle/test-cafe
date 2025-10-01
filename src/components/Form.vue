@@ -2,7 +2,7 @@
     <form ref="form" @submit.prevent="handleSubmit">
         <div class="form-input">
             <label>
-                Nombre
+                nombre
             </label>
             <input type="text" v-model="formData.firstName" />
             <span class="error" v-if="!isValidFirstName">This field is required</span>
@@ -26,13 +26,17 @@
         </div>
         <fieldset class="form-input">
 
-            <div>
+            <div class="radio-container">
+                <div class="radio">
+                    <input type="radio" id="info" value="info" v-model="formData.razon" />
+                    <label for="info">quiero info</label>
+                </div>
 
-                <input type="radio" id="info" value="info" v-model="formData.razon" />
-                <label for="info">quiero info</label>
+                <div class="radio">
+                    <input type="radio" id="estar" value="estar" v-model="formData.razon" />
+                    <label for="estar">quiero estar</label>
+                </div>
 
-                <input type="radio" id="estar" value="estar" v-model="formData.razon" />
-                <label for="estar">quiero estar</label>
             </div>
 
         </fieldset>
@@ -70,13 +74,13 @@ const formData = reactive<FormData>({
 });
 
 
-const isValidFirstName = computed(() => formData.firstName.length > 0);
-const isValidLastName = computed(() => formData.lastName.length > 0);
-const isValidEmail = computed(() => {
+const isValidFirstName = () => formData.firstName.length > 0;
+const isValidLastName = () => formData.lastName.length > 0;
+const isValidEmail = () => {
     // Simple email validation regex
     const email = formData.email;
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-});
+};
 const isFormValid = computed(() => isValidFirstName.value && isValidLastName.value && isValidEmail.value);
 
 const validateForm = () => {
@@ -94,7 +98,7 @@ form {
     width: min(700px, 100%);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     padding: 1.5rem;
 
 }
@@ -132,6 +136,16 @@ textarea {
 
 fieldset {
     border: none;
+}
+
+.radio {
+    display: flex;
+
+    input {
+        width: auto;
+        margin-right: 1rem;
+        margin-bottom: 0;
+    }
 }
 
 .radio-button {
