@@ -2,7 +2,9 @@
 import { ref, nextTick } from 'vue';
 import { useLanguage } from '@/composables/useLanguage';
 
+
 const { currentContent, toggleLanguage, currentLanguage } = useLanguage();
+console.log(currentLanguage.value)
 
 let isOpen = ref(false);
 
@@ -51,10 +53,12 @@ const scrollToSection = async (sectionId) => {
                 currentContent.navigation.imIn }}</a>
             <a href="#contact" @click="scrollToSection(currentContent.contact.sectionId)">{{
                 currentContent.navigation.contact }}</a>
-            <div class="lang-switcher" @click="toggleLanguage">
+            <div class="lang-switcher">
                 <div class="lang">
-                    {{ currentLanguage.toUpperCase() }}
+                    {{ currentLanguage }}
                     <font-awesome-icon icon="angle-down" />
+                    <div class="lang-options" @click="toggleLanguage">{{ currentLanguage === 'en' ? 'es' : 'en' }}
+                    </div>
                 </div>
             </div>
         </div>
