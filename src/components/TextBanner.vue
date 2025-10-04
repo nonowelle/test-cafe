@@ -38,15 +38,6 @@ const bannerId = props.textBanner.title
     text-align: center;
     align-items: center;
     scroll-snap-align: start;
-    // position: relative;
-    // top: 136px;
-
-    @media screen and (max-width: 1024px) {
-        height: auto;
-
-    }
-
-
 
     h2 {
         max-width: 80%;

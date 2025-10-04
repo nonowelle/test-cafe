@@ -64,11 +64,17 @@ body {
   scroll-snap-type: y mandatory;
 }
 
-/* Offset anchored section scroll for sticky nav (approx 136px header) */
-section {
-  scroll-margin-top: 136px;
-  
+/* Offset anchored section scroll for sticky nav */
+/* section {
+  scroll-margin-top: 80px;
 }
+
+
+@media screen and (max-width: 1024px) {
+  section {
+    scroll-margin-top: 0;
+  }
+} */
 
 h1,
 h2,

@@ -32,13 +32,7 @@ const props = defineProps<BoxItemProps>();
     align-items: center;
 
     width: 100%;
-
-}
-
-@media screen and (min-width: 1024px) {
-    .box-item {
-        height: 100vh;
-    }
+    height: 100vh;
 
 }
 
