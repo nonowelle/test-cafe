@@ -1,6 +1,8 @@
 <script setup>
-import { textContent } from '@/content/textContent';
 import { ref, nextTick } from 'vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { currentContent, toggleLanguage, currentLanguage } = useLanguage();
 
 let isOpen = ref(false);
 
@@ -43,20 +45,16 @@ const scrollToSection = async (sectionId) => {
             </div>
         </div>
         <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
-            <a href="#what" @click="scrollToSection('what')">{{ textContent.navigation.what }}</a>
-            <a href="#how" @click="scrollToSection('how')">{{ textContent.navigation.how }}</a>
-            <a href="#imin" @click="scrollToSection('imin')">{{ textContent.navigation.imIn }}</a>
-            <a href="#contact" @click="scrollToSection('contact')">{{ textContent.navigation.contact }}</a>
-            <div class="lang-switcher" href="">
+            <a href="#what" @click="scrollToSection('what')">{{ currentContent.navigation.what }}</a>
+            <a href="#how" @click="scrollToSection('how')">{{ currentContent.navigation.how }}</a>
+            <a href="#imin" @click="scrollToSection('imin')">{{ currentContent.navigation.imIn }}</a>
+            <a href="#contact" @click="scrollToSection('contact')">{{ currentContent.navigation.contact }}</a>
+            <div class="lang-switcher" @click="toggleLanguage">
                 <div class="lang">
-                    en
+                    {{ currentLanguage.toUpperCase() }}
                     <font-awesome-icon icon="angle-down" />
                 </div>
-
-                <div class="lang-options"><a href="">es</a></div>
             </div>
-
-
         </div>
 
     </nav>

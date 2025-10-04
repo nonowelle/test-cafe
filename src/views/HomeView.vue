@@ -6,10 +6,12 @@ import ScrollButton from '@/components/ScrollButton.vue';
 import Contact from '@/components/Contact.vue';
 import { ref } from 'vue';
 
-import { textContent } from '@/content/textContent';
+import { useLanguage } from '@/composables/useLanguage';
 
-const boxItems = textContent.boxItems;
-const textBanners = textContent.banners;
+const { currentContent } = useLanguage();
+
+const boxItems = currentContent.value.boxItems;
+const textBanners = currentContent.value.banners;
 
 const sectionRefs = ref([]);
 
@@ -18,9 +20,9 @@ const sectionRefs = ref([]);
 <template>
   <main>
 
-    <TextBanner v-for="(banner, index) in textBanners" :key="index" :textBanner="banner"
-      :id="banner.title.toLowerCase().replace('?', '')" />
-    <BoxItem v-for="(box, index) in boxItems" :key="index" :box="box" />
+    <TextBanner v-for="(banner, index) in currentContent.banners" :key="index" :textBanner="banner"
+      :id="banner.title.toLowerCase().replace(/[^a-z0-9]+/g, '')" />
+    <BoxItem v-for="(box, index) in currentContent.boxItems" :key="index" :box="box" />
     <ScrollButton />
     <Contact />
 
