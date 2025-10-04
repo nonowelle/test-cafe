@@ -1,5 +1,5 @@
 <template>
-    <section class="box-item" :id="bannerId">
+    <section class="box-item">
         <h2>{{ box.title }}</h2>
         <p v-if="box.description">{{ box.description }}</p>
         <Form />
@@ -17,12 +17,6 @@ interface BoxItemProps {
 }
 
 const props = defineProps<BoxItemProps>();
-// Normalize title into a safe, predictable id used by nav anchors
-const bannerId = props.box.title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '')
-    .trim();
-console.log(bannerId)
 
 </script>
 

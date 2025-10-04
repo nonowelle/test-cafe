@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { textContent } from '@/content/textContent';
+
 
 interface TextContentProps {
     textBanner: {

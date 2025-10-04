@@ -21,8 +21,8 @@ const sectionRefs = ref([]);
   <main>
 
     <TextBanner v-for="(banner, index) in currentContent.banners" :key="index" :textBanner="banner"
-      :id="banner.title.toLowerCase().replace(/[^a-z0-9]+/g, '')" />
-    <BoxItem v-for="(box, index) in currentContent.boxItems" :key="index" :box="box" />
+      :id="banner.sectionId" />
+    <BoxItem v-for="(box, index) in currentContent.boxItems" :key="index" :box="box" :id="box.sectionId" />
     <ScrollButton />
     <Contact />
 

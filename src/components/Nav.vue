@@ -16,14 +16,12 @@ const openMobileNav = () => {
 
 const scrollToSection = async (sectionId) => {
     closeMobileNav();
+    const element = document.getElementById(sectionId);
 
     await nextTick();
 
-    const element = document.getElementById(sectionId);
-    if (element) {
-        console.log(element)
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
 }
 
 </script>
@@ -45,10 +43,14 @@ const scrollToSection = async (sectionId) => {
             </div>
         </div>
         <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
-            <a href="#what" @click="scrollToSection('what')">{{ currentContent.navigation.what }}</a>
-            <a href="#how" @click="scrollToSection('how')">{{ currentContent.navigation.how }}</a>
-            <a href="#imin" @click="scrollToSection('imin')">{{ currentContent.navigation.imIn }}</a>
-            <a href="#contact" @click="scrollToSection('contact')">{{ currentContent.navigation.contact }}</a>
+            <a href="#what" @click="scrollToSection(currentContent.banners[0].sectionId)">{{
+                currentContent.navigation.what }}</a>
+            <a href="#how" @click="scrollToSection(currentContent.banners[1].sectionId)">{{
+                currentContent.navigation.how }}</a>
+            <a href="#imin" @click="scrollToSection(currentContent.boxItems[0].sectionId)">{{
+                currentContent.navigation.imIn }}</a>
+            <a href="#contact" @click="scrollToSection(currentContent.contact.sectionId)">{{
+                currentContent.navigation.contact }}</a>
             <div class="lang-switcher" @click="toggleLanguage">
                 <div class="lang">
                     {{ currentLanguage.toUpperCase() }}

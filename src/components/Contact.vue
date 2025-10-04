@@ -1,5 +1,5 @@
 <template>
-    <section id="contact">
+    <section :id="currentContent.contact.sectionId">
         <div class="contact-section">
             <h2>{{ currentContent.navigation.contact }}</h2>
             <div class="socials">
