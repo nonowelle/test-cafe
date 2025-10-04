@@ -87,7 +87,7 @@ onUnmounted(() => {
     left: 50%;
     transform: translateX(-50%);
 
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 1024px) {
         display: none;
     }
 

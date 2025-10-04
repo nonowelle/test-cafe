@@ -16,16 +16,22 @@ const openMobileNav = () => {
     isOpen.value = true;
 }
 
-const scrollToSection = async (sectionId) => {
+const scrollToSection = (sectionId) => {
+
     closeMobileNav();
-    const element = document.getElementById(sectionId);
 
-    await nextTick();
+    setTimeout(() => {
+        const element = document.getElementById(sectionId);
 
-    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'nearest'
+            });
+        }
+    }, 300);
 }
-
 </script>
 
 <template>
@@ -183,6 +189,7 @@ nav {
     align-self: center;
 
     align-self: flex-start;
+    width: 100%;
 
 }
 
@@ -246,7 +253,7 @@ nav {
     max-width: 70px;
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 1024px) {
     nav {
         flex-direction: row;
         height: auto;
@@ -278,6 +285,7 @@ nav {
 
         display: flex;
         align-self: auto;
+        width: auto;
     }
 }
 </style>

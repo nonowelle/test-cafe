@@ -52,11 +52,22 @@ const { currentContent } = useLanguage();
 
 .social:hover {
     color: var(--color-cta);
-    background-color: rgba(255, 255, 255, 0.1);
+    transform: none;
 }
 
 .logo {
     max-width: 20px;
     ;
+}
+
+@media screen and (max-width: 1024px) {
+    .socials {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .social {
+        font-size: 1rem;
+    }
 }
 </style>

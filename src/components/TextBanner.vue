@@ -41,7 +41,7 @@ const bannerId = props.textBanner.title
     // position: relative;
     // top: 136px;
 
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 1024px) {
         height: auto;
 
     }
