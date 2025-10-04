@@ -3,8 +3,14 @@
         <div class="contact-section">
             <h2>{{ currentContent.navigation.contact }}</h2>
             <div class="socials">
-                <div class="social">@cafephilo</div>
-                <div class="social">603624196</div>
+                <div class="social">
+                    <img class="logo" src="../assets/instagram.svg" />
+                    @cafephilo
+                </div>
+                <div class="social">
+                    <img class="logo" src="../assets/whatsapp.svg" />
+                    603624196
+                </div>
             </div>
         </div>
     </section>
@@ -30,5 +36,17 @@ const { currentContent } = useLanguage();
 .socials {
     display: flex;
     gap: 10rem;
+}
+
+.social {
+
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+}
+
+.logo {
+    max-width: 20px;
+    ;
 }
 </style>
