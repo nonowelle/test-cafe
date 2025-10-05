@@ -56,7 +56,7 @@ const scrollToSection = (sectionId) => {
                 currentContent.navigation.what }}</a>
             <a href="#how" @click="scrollToSection(currentContent.sections[1].sectionId)">{{
                 currentContent.navigation.how }}</a>
-            <a href="#imin" @click="scrollToSection(currentContent.boxItems[0].sectionId)">{{
+            <a href="#imin" @click="scrollToSection(currentContent.sections[2].sectionId)">{{
                 currentContent.navigation.imIn }}</a>
             <a href="#contact" @click="scrollToSection(currentContent.contact.sectionId)">{{
                 currentContent.navigation.contact }}</a>

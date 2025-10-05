@@ -28,8 +28,8 @@ const { currentContent } = useLanguage();
     flex-direction: column;
     width: 100%;
     align-items: center;
-    min-height: 300px;
-    border-top: 1px solid var(--color-links);
+    justify-content: center;
+    height: 100vh;
     padding: 5rem 3rem;
 }
 

@@ -113,6 +113,7 @@ label {
     font-size: 1rem;
     color: var(--color-heading);
     font-weight: 500;
+    text-align: left;
 }
 
 input,
