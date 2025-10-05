@@ -7,7 +7,7 @@
                     <img class="logo" src="../assets/instagram.svg" alt="Instagram" />
                     @cafephilo
                 </a>
-                <a href="https://wa.me/603624196" target="_blank" class="social">
+                <a href="https://wa.me/603624192" target="_blank" class="social">
                     <img class="logo" src="../assets/whatsapp.svg" alt="WhatsApp" />
                     +34603624192
                 </a>
