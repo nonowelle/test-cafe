@@ -48,7 +48,9 @@
         </div>
 
 
-        <button type="submit" :disabled="!isFormValid">go</button>
+        <button type="submit" :disabled="!isFormValid || submitting">{{ submitting ? 'sending…' : 'go' }}</button>
+        <p v-if="submitOk" style="margin: 0.5rem 0; color: var(--color-links);">Thanks! We received your request.</p>
+        <p v-if="submitError" class="error">Something went wrong. Please try again.</p>
 
     </form>
 </template>
@@ -86,11 +88,38 @@ const isValidEmail = () => {
 const isFormValid = computed(() => isValidFirstName() && isValidLastName() && isValidEmail());
 
 const validateForm = () => {
-
+    console.log('validating form')
 }
 
-const handleSubmit = () => {
+const submitting = ref(false);
+const submitOk = ref(false);
+const submitError = ref(false);
+
+const handleSubmit = async () => {
     validateForm();
+    if (!isFormValid.value || submitting.value) return;
+
+    submitting.value = true;
+    submitOk.value = false;
+    submitError.value = false;
+
+    try {
+        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+        const res = await fetch(`${baseUrl}/form`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        if (!res.ok) throw new Error('Request failed');
+        submitOk.value = true;
+        // optional: reset form fields
+        // Object.assign(formData, { firstName: '', lastName: '', email: '', razon: '', text: '' });
+    } catch (e) {
+        submitError.value = true;
+    } finally {
+        submitting.value = false;
+    }
 };
 
 </script>
