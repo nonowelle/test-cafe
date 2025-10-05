@@ -2,7 +2,7 @@
     <form ref="form" @submit.prevent="handleSubmit">
         <div class="form-input">
             <label>
-                nombre
+                {{ currentContent.form.name }}
             </label>
             <input type="text" v-model="formData.firstName" />
             <span class="error" v-if="!isValidFirstName">This field is required</span>
@@ -10,7 +10,7 @@
         </div>
         <div class="form-input">
             <label>
-                apellido
+                {{ currentContent.form.lastName }}
             </label>
             <input type="text" v-model="formData.lastName" />
             <span class="error" v-if="!isValidLastName">This field is required</span>
@@ -18,7 +18,7 @@
         </div>
         <div class="form-input">
             <label>
-                email
+                {{ currentContent.form.email }}
             </label>
             <input type="text" v-model="formData.email" />
             <span v-if="!isValidEmail" class="error">Please enter a valid email</span>
@@ -29,12 +29,12 @@
             <div class="radio-container">
                 <div class="radio">
                     <input type="radio" id="info" value="info" v-model="formData.razon" />
-                    <label for="info">quiero info</label>
+                    <label for="info">{{ currentContent.form.info }}</label>
                 </div>
 
                 <div class="radio">
                     <input type="radio" id="estar" value="estar" v-model="formData.razon" />
-                    <label for="estar">quiero estar</label>
+                    <label for="estar">{{ currentContent.form.estar }}</label>
                 </div>
 
             </div>
@@ -42,7 +42,7 @@
         </fieldset>
 
         <div class="form-input">
-            <label for="algo">cuentanos algo</label>
+            <label for="algo">{{ currentContent.form.algo }}</label>
 
             <textarea id="algo" name="algo" rows="5" cols="33" v-model="formData.text"></textarea>
         </div>
@@ -56,6 +56,8 @@
 
 <script setup lang="ts">
 import { reactive, computed, ref } from 'vue';
+import { useLanguage } from '@/composables/useLanguage';
+const { currentContent } = useLanguage();
 
 interface FormData {
     firstName: string;

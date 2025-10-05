@@ -35,9 +35,6 @@ const handleClick = (hash) => {
 const openMobileNav = () => {
     isOpen.value = true;
 }
-
-
-
 </script>
 
 <template>

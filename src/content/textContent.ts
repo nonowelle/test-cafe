@@ -33,6 +33,15 @@ export const textContent = {
    
     contact: {
       sectionId:"4"
+    },
+    form : {
+      
+        name : 'name',
+        lastName: 'last name',
+        email: "email",
+        info: 'i want info',
+        estar: 'i want to participate',
+        algo : 'tell us something'
     }
   },
   es: {
@@ -68,7 +77,16 @@ export const textContent = {
    
     contact: {
       sectionId: "4",
-    }
+    },
+    form : {
+      
+      name : 'nombre',
+      lastName: 'apellido',
+      email: "email",
+      info: 'quiero info',
+      estar: 'quiero estar',
+      algo : 'cuentanos algo'
+  }
   }
 };
 
