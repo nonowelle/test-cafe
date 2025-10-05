@@ -52,9 +52,9 @@ const scrollToSection = (sectionId) => {
             </div>
         </div>
         <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
-            <a href="#what" @click="scrollToSection(currentContent.banners[0].sectionId)">{{
+            <a href="#what" @click="scrollToSection(currentContent.sections[0].sectionId)">{{
                 currentContent.navigation.what }}</a>
-            <a href="#how" @click="scrollToSection(currentContent.banners[1].sectionId)">{{
+            <a href="#how" @click="scrollToSection(currentContent.sections[1].sectionId)">{{
                 currentContent.navigation.how }}</a>
             <a href="#imin" @click="scrollToSection(currentContent.boxItems[0].sectionId)">{{
                 currentContent.navigation.imIn }}</a>

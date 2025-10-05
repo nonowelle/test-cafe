@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import BoxItem from '@/components/BoxItem.vue';
-import TextBanner from '../components/TextBanner.vue';
-import ScrollButton from '@/components/ScrollButton.vue';
+
+import Section from '../components/Section.vue';
+
 import Contact from '@/components/Contact.vue';
 
 import { useLanguage } from '@/composables/useLanguage';
@@ -15,9 +15,9 @@ const { currentContent } = useLanguage();
 <template>
   <main>
 
-    <TextBanner v-for="(banner, index) in currentContent.banners" :key="index" :textBanner="banner"
-      :id="banner.sectionId" />
-    <BoxItem v-for="(box, index) in currentContent.boxItems" :key="index" :box="box" :id="box.sectionId" />
+    <Section v-for="(section, index) in currentContent.sections" :key="index" :section="section"
+      :id="section.sectionId" />
+
 
     <Contact />
 

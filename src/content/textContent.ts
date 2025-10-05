@@ -1,6 +1,6 @@
 export const textContent = {
   en: {
-    banners: [
+    sections: [
       {
         sectionId: "1",
         title: "what?",
@@ -14,7 +14,15 @@ export const textContent = {
         subtitle: "",
         description: "during 90 minutes, a philosopher-mediator takes you through the meanders of thought, based on a film, literature, or any existential or philosophical current topic.",
         descriptionDeux: ""
+      },
+      {
+        sectionId: "3",
+        title: "i'm in",
+        subtitle: "reserve my spot",
+        description: "next session in october",
+        hasForm: true
       }
+      
     ],
     navigation: {
       what: "what?",
@@ -22,20 +30,13 @@ export const textContent = {
       imIn: "i'm in",
       contact: "contact"
     },
-    boxItems: [
-      { 
-        sectionId: "3",
-        title: "i'm in",
-        subtitle: "reserve my spot",
-        description: "next session in october",
-      }
-    ],
+   
     contact: {
       sectionId:"4"
     }
   },
   es: {
-    banners: [
+    sections: [
       {
         sectionId: "1",
         title: "¿qué?",
@@ -49,6 +50,13 @@ export const textContent = {
         subtitle: "",
         description: "durante 90 minutos, un filósofo-mediador os lleva consigo en los meandros del pensamiento, basándose en una obra de cine, de literatura, o en cualquier tema existencial o corriente filosófica.",
         descriptionDeux: ""
+      },
+      {
+        sectionId: "3",
+        title: "me apunto",
+        subtitle: "reservo mi plaza",
+        description: "próxima sesión en octubre",
+        hasForm: true
       }
     ],
     navigation: {
@@ -57,14 +65,7 @@ export const textContent = {
       imIn: "me apunto",
       contact: "contacto"
     },
-    boxItems: [
-      {
-        sectionId: "3",
-        title: "me apunto",
-        subtitle: "reservo mi plaza",
-        description: "próxima sesión en octubre",
-      }
-    ],
+   
     contact: {
       sectionId: "4",
     }
