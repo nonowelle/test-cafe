@@ -1,10 +1,11 @@
 <script setup>
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, useTemplateRef } from 'vue';
 import { useLanguage } from '@/composables/useLanguage';
 
 
 const { currentContent, toggleLanguage, currentLanguage } = useLanguage();
-console.log(currentLanguage.value)
+
+const header = useTemplateRef('header')
 
 let isOpen = ref(false);
 
@@ -12,31 +13,35 @@ const closeMobileNav = () => {
     isOpen.value = false;
 }
 
+const handleClick = (hash) => {
+    closeMobileNav();
+
+    setTimeout(() => {
+        const target = document.getElementById(hash);
+        const navHeight = header.value.offsetHeight;
+
+        if (target) {
+
+            const targetPosition = target.querySelector('h2').getBoundingClientRect().top + window.pageYOffset;
+
+            window.scrollTo({
+                top: targetPosition - navHeight - 100,
+                behavior: 'smooth'
+            });
+        }
+    }, 600);
+};
+
 const openMobileNav = () => {
     isOpen.value = true;
 }
 
-const scrollToSection = (sectionId) => {
 
-    closeMobileNav();
-
-    setTimeout(() => {
-        const element = document.getElementById(sectionId);
-
-        if (element) {
-            element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-                inline: 'nearest'
-            });
-        }
-    }, 300);
-}
 
 </script>
 
 <template>
-    <nav :class="{ open: isOpen }">
+    <nav :class="{ open: isOpen }" ref="header">
 
         <div class="first-section">
             <div class="company">
@@ -52,14 +57,19 @@ const scrollToSection = (sectionId) => {
             </div>
         </div>
         <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
-            <a href="#what" @click="scrollToSection(currentContent.sections[0].sectionId)">{{
-                currentContent.navigation.what }}</a>
-            <a href="#how" @click="scrollToSection(currentContent.sections[1].sectionId)">{{
-                currentContent.navigation.how }}</a>
-            <a href="#imin" @click="scrollToSection(currentContent.sections[2].sectionId)">{{
-                currentContent.navigation.imIn }}</a>
-            <a href="#contact" @click="scrollToSection(currentContent.contact.sectionId)">{{
-                currentContent.navigation.contact }}</a>
+            <li @click="handleClick('1')">
+                <a href="#1" v-smooth-scroll>{{
+                    currentContent.navigation.what }}</a>
+            </li>
+            <li @click="handleClick('2')">
+                <a href="#2" v-smooth-scroll>{{
+                    currentContent.navigation.how }}</a>
+            </li>
+            <li @click="handleClick('3')"><a href="#3" v-smooth-scroll>{{
+                currentContent.navigation.imIn }}</a></li>
+            <li @click="handleClick('4')"> <a href="#4" v-smooth-scroll>{{
+                currentContent.navigation.contact }}</a></li>
+
             <div class="lang-switcher">
                 <div class="lang">
                     {{ currentLanguage }}
@@ -111,6 +121,12 @@ nav {
     &-wrapper {
         position: absolute;
         left: -100%;
+    }
+
+    li {
+        text-decoration: none;
+        list-style: none;
+
     }
 
     &.open {

@@ -4,6 +4,7 @@
 import Form from '@/components/Form.vue';
 interface TextContentProps {
     section: {
+        sectionId: string;
         title: string;
         subtitle: string;
         description: string;
@@ -14,15 +15,11 @@ interface TextContentProps {
 
 const props = defineProps<TextContentProps>();
 
-// Normalize title into a safe, predictable id used by nav anchors
-const sectionId = props.section.title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '')
-    .trim();
+// Use provided sectionId so nav anchors like #1, #2 match
 </script>
 
 <template>
-    <section class="text-section" :id="sectionId">
+    <section class="text-section" :id="section.sectionId">
         <h2>{{ section.title }} <br>{{ section.subtitle }}</h2>
         <p>{{ section.description }}</p>
         <p v-if="section.descriptionDeux" v-html="section?.descriptionDeux"></p>
