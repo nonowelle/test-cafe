@@ -17,37 +17,22 @@ const openMobileNav = () => {
 }
 
 const scrollToSection = (sectionId) => {
+
     closeMobileNav();
 
     setTimeout(() => {
         const element = document.getElementById(sectionId);
 
         if (element) {
-            // Get element position and dimensions
-            const elementRect = element.getBoundingClientRect();
-            const elementTop = elementRect.top + window.pageYOffset;
-            const elementHeight = elementRect.height;
-
-            // Get viewport height
-            const viewportHeight = window.innerHeight;
-
-            // Get header height (sticky nav)
-            const header = document.querySelector('nav');
-            const headerHeight = header ? header.offsetHeight : 0;
-
-            // Calculate position to center the element in viewport, accounting for header
-            const availableHeight = viewportHeight - headerHeight;
-            const scrollPosition = elementTop - (availableHeight / 2) + (elementHeight / 2)
-            console.log('scrollPosition:', scrollPosition)
-
-            // Smooth scroll to calculated position
-            window.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'nearest'
             });
         }
     }, 300);
 }
+
 </script>
 
 <template>
@@ -307,5 +292,6 @@ nav {
     .logo {
         max-width: 70px;
     }
+
 }
 </style>

@@ -82,7 +82,7 @@ onUnmounted(() => {
     transition: transform 0.1s ease,
     opacity 0.2s ease,
     background 0.2s ease;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     position:fixed;
     left: 50%;
     transform: translateX(-50%);

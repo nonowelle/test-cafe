@@ -9,7 +9,7 @@
                 </a>
                 <a href="https://wa.me/603624196" target="_blank" class="social">
                     <img class="logo" src="../assets/whatsapp.svg" alt="WhatsApp" />
-                    603624196
+                    +34603624192
                 </a>
             </div>
         </div>

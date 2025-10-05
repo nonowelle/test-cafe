@@ -4,16 +4,11 @@ import BoxItem from '@/components/BoxItem.vue';
 import TextBanner from '../components/TextBanner.vue';
 import ScrollButton from '@/components/ScrollButton.vue';
 import Contact from '@/components/Contact.vue';
-import { ref } from 'vue';
 
 import { useLanguage } from '@/composables/useLanguage';
 
 const { currentContent } = useLanguage();
 
-const boxItems = currentContent.value.boxItems;
-const textBanners = currentContent.value.banners;
-
-const sectionRefs = ref([]);
 
 </script>
 
@@ -23,7 +18,7 @@ const sectionRefs = ref([]);
     <TextBanner v-for="(banner, index) in currentContent.banners" :key="index" :textBanner="banner"
       :id="banner.sectionId" />
     <BoxItem v-for="(box, index) in currentContent.boxItems" :key="index" :box="box" :id="box.sectionId" />
-    <ScrollButton />
+
     <Contact />
 
 

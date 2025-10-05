@@ -37,7 +37,7 @@ const bannerId = props.textBanner.title
     justify-content: center;
     text-align: center;
     align-items: center;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
 
     h2 {
         max-width: 80%;
