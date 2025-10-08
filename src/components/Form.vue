@@ -247,6 +247,7 @@ fieldset {
 .error {
     color: #b00020;
     font-size: 0.9rem;
+    text-align: left;
 }
 
 button[type="submit"] {
