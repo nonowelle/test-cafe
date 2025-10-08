@@ -1,27 +1,23 @@
 <template>
     <form ref="form" @submit.prevent="handleSubmit">
-        <!-- First Name -->
         <div class="form-input">
             <label>{{ currentContent.form.name }}</label>
             <input type="text" v-model.trim="formData.firstName" @blur="validateField('firstName')" />
             <span class="error" v-if="errors.firstName">{{ errors.firstName }}</span>
         </div>
 
-        <!-- Last Name -->
         <div class="form-input">
             <label>{{ currentContent.form.lastName }}</label>
             <input type="text" v-model.trim="formData.lastName" @blur="validateField('lastName')" />
             <span class="error" v-if="errors.lastName">{{ errors.lastName }}</span>
         </div>
 
-        <!-- Email -->
         <div class="form-input">
             <label>{{ currentContent.form.email }}</label>
             <input type="text" v-model.trim="formData.email" @blur="validateField('email')" />
             <span class="error" v-if="errors.email">{{ errors.email }}</span>
         </div>
 
-        <!-- Radio -->
         <fieldset class="form-input">
             <div class="radio-container">
                 <div class="radio">
@@ -36,7 +32,6 @@
             <span class="error" v-if="errors.razon">{{ errors.razon }}</span>
         </fieldset>
 
-        <!-- Textarea -->
         <div class="form-input">
             <label for="algo">{{ currentContent.form.algo }}</label>
             <textarea id="algo" name="algo" rows="5" cols="33" v-model.trim="formData.text"
@@ -44,7 +39,6 @@
             <span class="error" v-if="errors.text">{{ errors.text }}</span>
         </div>
 
-        <!-- Submit -->
         <button type="submit" :disabled="!isFormValid || submitting">
             {{ submitting ? 'Sending…' : 'Go' }}
         </button>
@@ -59,6 +53,9 @@
 <script setup lang="ts">
 import { reactive, ref, computed } from 'vue'
 import { useLanguage } from '@/composables/useLanguage'
+import { watch } from 'vue'
+
+
 
 const { currentContent } = useLanguage()
 
@@ -77,8 +74,7 @@ const formData = reactive<FormData>({
     razon: '',
     text: ''
 })
-
-// --- Error tracking ---
+watch(() => formData.text, () => validateField('text'))
 const errors = reactive<Record<keyof FormData, string>>({
     firstName: '',
     lastName: '',
@@ -87,7 +83,6 @@ const errors = reactive<Record<keyof FormData, string>>({
     text: ''
 })
 
-// --- Validation rules ---
 const validators = {
     firstName: (val: string) => {
         if (!val) return 'First name is required'
@@ -112,26 +107,43 @@ const validators = {
         return ''
     },
     text: (val: string) => {
-        if (val.length < 5) return 'Message must be at least 5 characters'
+        // Block potential XSS or HTML/script content
+        if (!val.trim()) return ''
+        const forbiddenPattern = /<|>|<\/?script|on\w+=|javascript:/i
+        if (forbiddenPattern.test(val)) return 'HTML or script content is not allowed'
+
         return ''
     }
 }
 
 // --- Validation helpers ---
 const validateField = (field: keyof FormData) => {
-    errors[field] = validators[field](formData[field])
+    const newError = validators[field](formData[field])
+    errors[field] = newError;
+    return !newError;
 }
 
 const validateForm = () => {
-    Object.keys(formData).forEach((key) => validateField(key as keyof FormData))
-    return Object.values(errors).every((e) => e === '')
+    let allValid = true;
+    (Object.keys(formData) as (keyof FormData)[]).forEach((key) => {
+        if (key === 'text' && !formData.text.trim()) {
+            errors.text = '';
+            return;
+        }
+        const valid = validateField(key);
+        if (!valid) allValid = false;
+    })
+    return allValid;
 }
+
 
 // --- Computed ---
 const isFormValid = computed(() => {
-    return Object.values(errors).every((e) => e === '') &&
-        Object.values(formData).some((v) => v !== '')
-})
+    // All errors must be empty AND all required fields non-empty
+    const noErrors = Object.values(errors).every((e) => e === '')
+    const filledRequired = !!formData.firstName && !!formData.lastName && !!formData.email && !!formData.razon
+    return noErrors && filledRequired
+});
 
 // --- Submission handling ---
 const submitting = ref(false)
