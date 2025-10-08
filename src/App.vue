@@ -1,28 +1,18 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
+import { RouterView } from 'vue-router';
+
 import Nav from './components/Nav.vue';
-import Hero from './components/Hero.vue';
+
 </script>
 
 <template>
-  <header>
-    <Nav />
-  </header>
 
+  <Nav />
   <RouterView />
 </template>
 
 <style lang="scss" scoped>
-header {
-
-  z-index: 1000;
-  background: var(--color-background, #fff);
-  width: 100%;
-  height: 80px;
-  line-height: 1.5;
-  margin-bottom: 2rem;
-}
+header {}
 
 .logo {
   display: block;
@@ -44,11 +34,6 @@ header {
     margin: 0 2rem 0 0;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 
 
 }

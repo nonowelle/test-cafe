@@ -1,3 +1,20 @@
+## Server (Google Sheets proxy)
+
+Environment variables:
+
+```
+GOOGLE_SERVICE_ACCOUNT_EMAIL=...
+GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=...   # paste with newlines escaped as \n
+GOOGLE_SHEET_ID=...
+PORT=5174
+ALLOWED_ORIGIN=http://localhost:5173
+```
+
+Start dev (client + server):
+
+```
+npm run dev:full
+```
 # .
 
 This template should help get you started developing with Vue 3 in Vite.

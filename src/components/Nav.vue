@@ -1,89 +1,310 @@
-<script setup lang="ts">
-import { RouterLink } from 'vue-router';
+<script setup>
+import { ref, nextTick, useTemplateRef } from 'vue';
+import { useLanguage } from '@/composables/useLanguage';
 
-const text = "Brewing something smart...";
-const textArray = text.split('').map(char => char === ' ' ? '\u00A0' : char); // Convert spaces to non-breaking spaces
 
-// Function to get the letter index (excluding spaces)
-const getLetterIndex = (index: number) => {
-    let letterIndex = 0;
-    for (let i = 0; i < index; i++) {
-        if (textArray[i] !== '\u00A0') {
-            letterIndex++;
+const { currentContent, toggleLanguage, currentLanguage } = useLanguage();
+
+const header = useTemplateRef('header')
+
+let isOpen = ref(false);
+
+const closeMobileNav = () => {
+    isOpen.value = false;
+}
+
+const handleClick = (hash) => {
+    closeMobileNav();
+
+    setTimeout(() => {
+        const target = document.getElementById(hash);
+        const navHeight = header.value.offsetHeight;
+
+        if (target) {
+
+            const targetPosition = target.querySelector('h2').getBoundingClientRect().top + window.pageYOffset;
+
+            window.scrollTo({
+                top: targetPosition - navHeight - 100,
+                behavior: 'smooth'
+            });
         }
-    }
-    return letterIndex;
+    }, 600);
 };
+
+const openMobileNav = () => {
+    isOpen.value = true;
+}
 </script>
 
 <template>
-    <nav>
-        <RouterLink to="/" class="bouncing-text">
-            <span v-for="(char, index) in textArray" :key="index" :class="char === '\u00A0' ? 'space' : 'bounce-letter'"
-                :style="char !== '\u00A0' ? { animationDelay: `${getLetterIndex(index) * 0.1}s` } : {}">
-                {{ char }}
-            </span>
-        </RouterLink>
+    <nav :class="{ open: isOpen }" ref="header">
+
+        <div class="first-section">
+            <div class="company">
+                <img class="logo" src="../assets/logo.png" alt="logo cafe philo">
+                <p class="company">caféphilo</p>
+            </div>
+
+            <div class="close-button" @click="closeMobileNav">X</div>
+            <div class="menu-icon" @click="openMobileNav" ref="menuIcon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div ref="secondSection" :class="[{ visible: isOpen }, 'second-section']">
+            <li @click="handleClick('1')">
+                <a href="#1" v-smooth-scroll>{{
+                    currentContent.navigation.what }}</a>
+            </li>
+            <li @click="handleClick('2')">
+                <a href="#2" v-smooth-scroll>{{
+                    currentContent.navigation.how }}</a>
+            </li>
+            <li @click="handleClick('3')"><a href="#3" v-smooth-scroll>{{
+                currentContent.navigation.imIn }}</a></li>
+            <li @click="handleClick('4')"> <a href="#4" v-smooth-scroll>{{
+                currentContent.navigation.contact }}</a></li>
+
+            <div class="lang-switcher">
+                <div class="lang">
+                    {{ currentLanguage }}
+                    <font-awesome-icon icon="angle-down" />
+                    <div class="lang-options" @click="toggleLanguage">{{ currentLanguage === 'en' ? 'es' : 'en' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </nav>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 nav {
     width: 100%;
+    max-height: 136px;
+    height: 100vh;
+
+
     font-size: 18px;
     text-align: center;
-    margin-bottom: 6rem;
+
     display: flex;
-    justify-content: center;
-    background-color: var(--color-background-orange);
+    flex-direction: column;
+    gap: 3rem;
+
+    justify-content: flex-start;
+    background-color: var(--color-background);
+    z-index: 100;
+
     border-radius: 8px;
-    padding: 2rem;
 
-}
+    color: var(--color-links);
+    font-weight: 500;
+    align-items: center;
 
-nav a.router-link-exact-active {
-    color: var(--color-text);
-}
 
-nav a.router-link-exact-active:hover {
-    background-color: transparent;
-}
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-links);
+    padding-bottom: 1rem;
+    transition: max-height 0.4s linear;
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding: 36px;
 
-.bouncing-text {
-    display: inline-block;
-}
 
-.bounce-letter {
-    display: inline-block;
-    animation: bounce 1s ease-in-out infinite;
-    font-family: 'Silkscreen', monospace;
-    font-weight: 700;
-}
-
-.space {
-    display: inline-block;
-    font-family: 'Silkscreen', monospace;
-    font-weight: 700;
-    width: 0.3em;
-    min-width: 0.3em;
-}
-
-@keyframes bounce {
-
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        transform: translateY(0);
+    &-wrapper {
+        position: absolute;
+        left: -100%;
     }
 
-    40% {
-        transform: translateY(1px);
+    li {
+        text-decoration: none;
+        list-style: none;
+
     }
 
-    60% {
-        transform: translateY(-2px);
+    &.open {
+        max-height: 100vh;
+        z-index: 1000;
+        height: 100vh;
+
+        .close-button {
+            display: flex;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            display: none;
+        }
+
+        .second-section {
+            display: flex;
+        }
     }
+
+    .close-button {
+        display: none;
+    }
+
+    .menu-icon {
+        display: flex;
+
+        flex-direction: column;
+        cursor: pointer;
+
+
+        span {
+            display: block;
+            border-radius: 15px;
+            width: 25px;
+            height: 2px;
+            background-color: var(--color-links);
+            margin: 3px;
+            transition: all 0.4s ease;
+        }
+
+    }
+}
+
+
+
+.first-section {
+    display: flex;
+    font-size: 32px;
+    gap: 24px;
+    align-items: center;
+
+    width: 100%;
+    justify-content: space-between;
+}
+
+.company {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    font-size: 1.4rem;
+    padding: 3px;
+}
+
+
+
+.second-section {
+    display: none;
+    justify-content: space-between;
+    font-size: 32px;
+    font-style: italic;
+    gap: 1.5rem;
+    flex-direction: column;
+    align-self: center;
+
+    align-self: flex-start;
+    width: 100%;
+
+}
+
+
+.lang-switcher {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: none;
+    position: relative;
+
+    svg {
+        font-size: 1rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        display: flex;
+    }
+
+    &:hover {
+        .lang-options {
+            display: block;
+            z-index: 100;
+
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: absolute;
+            top: 50px;
+
+            background-color: var(--c-purple-light);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+
+            a {
+                color: white;
+                transform: none;
+                font-size: 1rem;
+                ;
+            }
+        }
+    }
+
+}
+
+.lang-options {
+    display: none;
+}
+
+.logo {
+    max-width: 35px;
+}
+
+@media screen and (min-width: 1024px) {
+    nav {
+        flex-direction: row;
+        height: auto;
+        justify-content: space-between;
+        gap: 1.5rem;
+        padding: 16px;
+
+        border-bottom: 1px solid var(--color-links);
+
+        .close-button {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+        }
+
+    }
+
+
+    .first-section {
+        width: 30%;
+        align-self: auto;
+
+    }
+
+    .second-section {
+        flex-direction: row;
+
+        display: flex;
+        align-self: auto;
+        width: auto;
+    }
+
+    .logo {
+        max-width: 70px;
+    }
+
 }
 </style>
