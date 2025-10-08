@@ -26,14 +26,27 @@ app.options('*', cors(corsOptions));
 
 app.post("/form", async (req, res) => {
   try {
+    console.log(req.body)
     // Ici, tu peux ajouter des vérifications (captcha, regex email, etc.)
+    // Beaucoup de Google Apps Script attendent un POST form-urlencoded (e.parameter)
+   
+
     const response = await fetch(process.env.GOOGLE_SCRIPT_URL, {
       method: "POST",
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body),
     });
 
-    const result = await response.json();
-    res.json(result);
+    const text = await response.text();
+console.log('Réponse brute:', text);
+try {
+  const result = JSON.parse(text);
+  res.json(result);
+} catch (e) {
+  console.error("Réponse non JSON :", text);
+  res.status(500).json({ error: "Réponse non JSON reçue du Google Script" });
+}
+
   } catch (error) {
     console.error("Erreur proxy:", error);
     res.status(500).json({ error: "Erreur interne du serveur" });

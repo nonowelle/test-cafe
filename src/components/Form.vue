@@ -105,6 +105,8 @@ const handleSubmit = async () => {
 
     try {
         const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+        console.log(JSON.stringify(formData))
+
         const res = await fetch(`${baseUrl}/form`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
