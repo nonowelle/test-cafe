@@ -42,6 +42,9 @@ export const textContent = {
         info: 'i want info',
         estar: 'i want to participate',
         algo : 'tell us something'
+    },
+    attendees: {
+      title: "Attendees' List"
     }
   },
   es: {
@@ -86,6 +89,9 @@ export const textContent = {
       info: 'quiero info',
       estar: 'quiero estar',
       algo : 'cuentanos algo'
+  },
+  attendees: {
+    title: "lista de participantes"
   }
   }
 };

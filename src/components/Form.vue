@@ -4,7 +4,7 @@
             <label>
                 {{ currentContent.form.name }}
             </label>
-            <input type="text" v-model="formData.firstName" />
+            <input type="text" v-model="formData.firstName" @blur="validateEmail" />
             <span class="error" v-if="!isValidFirstName">This field is required</span>
 
         </div>
@@ -20,7 +20,7 @@
             <label>
                 {{ currentContent.form.email }}
             </label>
-            <input type="text" v-model="formData.email" />
+            <input type="text" v-model="formData.email" @blur="validateEmail" />
             <span v-if="!isValidEmail" class="error">Please enter a valid email</span>
 
         </div>
@@ -76,16 +76,21 @@ const formData = reactive<FormData>({
     razon: '',
     text: ''
 });
-
+let isValidEmail = ref(true);
 
 const isValidFirstName = () => formData.firstName.length > 0;
+
+const validateEmail = () => {
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        isValidEmail.value = true;
+    } else {
+        isValidEmail.value = false;
+    }
+}
 const isValidLastName = () => formData.lastName.length > 0;
-const isValidEmail = () => {
-    // Simple email validation regex
-    const email = formData.email;
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-};
-const isFormValid = computed(() => isValidFirstName() && isValidLastName() && isValidEmail());
+
+const isValidReason = () => formData.razon !== null;
+const isFormValid = computed(() => isValidFirstName() && isValidLastName() && isValidEmail() && isValidReason());
 
 const validateForm = () => {
     console.log('validating form')
