@@ -1,72 +1,73 @@
 <template>
     <form ref="form" @submit.prevent="handleSubmit">
+        <!-- First Name -->
         <div class="form-input">
-            <label>
-                {{ currentContent.form.name }}
-            </label>
-            <input type="text" v-model="formData.firstName" @blur="validateEmail" />
-            <span class="error" v-if="!isValidFirstName">This field is required</span>
-
+            <label>{{ currentContent.form.name }}</label>
+            <input type="text" v-model.trim="formData.firstName" @blur="validateField('firstName')" />
+            <span class="error" v-if="errors.firstName">{{ errors.firstName }}</span>
         </div>
+
+        <!-- Last Name -->
         <div class="form-input">
-            <label>
-                {{ currentContent.form.lastName }}
-            </label>
-            <input type="text" v-model="formData.lastName" />
-            <span class="error" v-if="!isValidLastName">This field is required</span>
-
+            <label>{{ currentContent.form.lastName }}</label>
+            <input type="text" v-model.trim="formData.lastName" @blur="validateField('lastName')" />
+            <span class="error" v-if="errors.lastName">{{ errors.lastName }}</span>
         </div>
+
+        <!-- Email -->
         <div class="form-input">
-            <label>
-                {{ currentContent.form.email }}
-            </label>
-            <input type="text" v-model="formData.email" @blur="validateEmail" />
-            <span v-if="!isValidEmail" class="error">Please enter a valid email</span>
-
+            <label>{{ currentContent.form.email }}</label>
+            <input type="text" v-model.trim="formData.email" @blur="validateField('email')" />
+            <span class="error" v-if="errors.email">{{ errors.email }}</span>
         </div>
+
+        <!-- Radio -->
         <fieldset class="form-input">
-
             <div class="radio-container">
                 <div class="radio">
                     <input type="radio" id="info" value="info" v-model="formData.razon" />
                     <label for="info">{{ currentContent.form.info }}</label>
                 </div>
-
                 <div class="radio">
                     <input type="radio" id="estar" value="estar" v-model="formData.razon" />
                     <label for="estar">{{ currentContent.form.estar }}</label>
                 </div>
-
             </div>
-
+            <span class="error" v-if="errors.razon">{{ errors.razon }}</span>
         </fieldset>
 
+        <!-- Textarea -->
         <div class="form-input">
             <label for="algo">{{ currentContent.form.algo }}</label>
-
-            <textarea id="algo" name="algo" rows="5" cols="33" v-model="formData.text"></textarea>
+            <textarea id="algo" name="algo" rows="5" cols="33" v-model.trim="formData.text"
+                @blur="validateField('text')"></textarea>
+            <span class="error" v-if="errors.text">{{ errors.text }}</span>
         </div>
 
+        <!-- Submit -->
+        <button type="submit" :disabled="!isFormValid || submitting">
+            {{ submitting ? 'Sending…' : 'Go' }}
+        </button>
 
-        <button type="submit" :disabled="!isFormValid || submitting">{{ submitting ? 'sending…' : 'go' }}</button>
-        <p v-if="submitOk" style="margin: 0.5rem 0; color: var(--color-links);">Thanks! We received your request.</p>
+        <p v-if="submitOk" style="margin: 0.5rem 0; color: var(--color-links);">
+            Thanks! We received your request.
+        </p>
         <p v-if="submitError" class="error">Something went wrong. Please try again.</p>
-
     </form>
 </template>
 
-
 <script setup lang="ts">
-import { reactive, computed, ref } from 'vue';
-import { useLanguage } from '@/composables/useLanguage';
-const { currentContent } = useLanguage();
+import { reactive, ref, computed } from 'vue'
+import { useLanguage } from '@/composables/useLanguage'
+
+const { currentContent } = useLanguage()
 
 interface FormData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    razon: string;
-    text: string;
+    firstName: string
+    lastName: string
+    email: string
+    razon: string
+    text: string
 }
 
 const formData = reactive<FormData>({
@@ -75,60 +76,99 @@ const formData = reactive<FormData>({
     email: '',
     razon: '',
     text: ''
-});
-let isValidEmail = ref(true);
+})
 
-const isValidFirstName = () => formData.firstName.length > 0;
+// --- Error tracking ---
+const errors = reactive<Record<keyof FormData, string>>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    razon: '',
+    text: ''
+})
 
-const validateEmail = () => {
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-        isValidEmail.value = true;
-    } else {
-        isValidEmail.value = false;
+// --- Validation rules ---
+const validators = {
+    firstName: (val: string) => {
+        if (!val) return 'First name is required'
+        if (!/^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(val))
+            return 'Please enter a valid first name'
+        return ''
+    },
+    lastName: (val: string) => {
+        if (!val) return 'Last name is required'
+        if (!/^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(val))
+            return 'Please enter a valid last name'
+        return ''
+    },
+    email: (val: string) => {
+        if (!val) return 'Email is required'
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
+            return 'Please enter a valid email'
+        return ''
+    },
+    razon: (val: string) => {
+        if (!val) return 'Please select a reason'
+        return ''
+    },
+    text: (val: string) => {
+        if (val.length < 5) return 'Message must be at least 5 characters'
+        return ''
     }
 }
-const isValidLastName = () => formData.lastName.length > 0;
 
-const isValidReason = () => formData.razon !== null;
-const isFormValid = computed(() => isValidFirstName() && isValidLastName() && isValidEmail() && isValidReason());
-
-const validateForm = () => {
-    console.log('validating form')
+// --- Validation helpers ---
+const validateField = (field: keyof FormData) => {
+    errors[field] = validators[field](formData[field])
 }
 
-const submitting = ref(false);
-const submitOk = ref(false);
-const submitError = ref(false);
+const validateForm = () => {
+    Object.keys(formData).forEach((key) => validateField(key as keyof FormData))
+    return Object.values(errors).every((e) => e === '')
+}
+
+// --- Computed ---
+const isFormValid = computed(() => {
+    return Object.values(errors).every((e) => e === '') &&
+        Object.values(formData).some((v) => v !== '')
+})
+
+// --- Submission handling ---
+const submitting = ref(false)
+const submitOk = ref(false)
+const submitError = ref(false)
 
 const handleSubmit = async () => {
-    validateForm();
-    if (!isFormValid.value || submitting.value) return;
+    if (!validateForm() || submitting.value) return
 
-    submitting.value = true;
-    submitOk.value = false;
-    submitError.value = false;
+    submitting.value = true
+    submitOk.value = false
+    submitError.value = false
 
     try {
-        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
-        console.log(JSON.stringify(formData))
-
+        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
         const res = await fetch(`${baseUrl}/form`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
-        });
+        })
 
-        if (!res.ok) throw new Error('Request failed');
-        submitOk.value = true;
-        // optional: reset form fields
-        // Object.assign(formData, { firstName: '', lastName: '', email: '', razon: '', text: '' });
+        if (!res.ok) throw new Error('Request failed')
+
+        submitOk.value = true
+        Object.assign(formData, {
+            firstName: '',
+            lastName: '',
+            email: '',
+            razon: '',
+            text: ''
+        })
     } catch (e) {
-        submitError.value = true;
+        submitError.value = true
     } finally {
-        submitting.value = false;
+        submitting.value = false
     }
-};
-
+}
 </script>
 
 <style scoped lang="scss">
