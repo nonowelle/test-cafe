@@ -44,9 +44,9 @@
         </button>
 
         <p v-if="submitOk" style="margin: 0.5rem 0; color: var(--color-links);">
-            Thanks! We received your request.
+            {{ currentContent.form.errors.success }}
         </p>
-        <p v-if="submitError" class="error">Something went wrong. Please try again.</p>
+        <p v-if="submitError" class="error"> {{ currentContent.form.errors.form }}</p>
     </form>
 </template>
 
@@ -85,32 +85,32 @@ const errors = reactive<Record<keyof FormData, string>>({
 
 const validators = {
     firstName: (val: string) => {
-        if (!val) return 'First name is required'
+        if (!val) return currentContent.value.form.errors.firstName[1]
         if (!/^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(val))
-            return 'Please enter a valid first name'
+            return currentContent.value.form.errors.firstName[0]
         return ''
     },
     lastName: (val: string) => {
-        if (!val) return 'Last name is required'
+        if (!val) return currentContent.value.form.errors.lastName[1]
         if (!/^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(val))
-            return 'Please enter a valid last name'
+            return currentContent.value.form.errors.firstName[0]
         return ''
     },
     email: (val: string) => {
-        if (!val) return 'Email is required'
+        if (!val) return currentContent.value.form.errors.email[1]
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
-            return 'Please enter a valid email'
+            return currentContent.value.form.errors.firstName[0]
         return ''
     },
     razon: (val: string) => {
-        if (!val) return 'Please select a reason'
+        if (!val) return currentContent.value.form.errors.razon;
         return ''
     },
     text: (val: string) => {
         // Block potential XSS or HTML/script content
         if (!val.trim()) return ''
         const forbiddenPattern = /<|>|<\/?script|on\w+=|javascript:/i
-        if (forbiddenPattern.test(val)) return 'HTML or script content is not allowed'
+        if (forbiddenPattern.test(val)) return currentContent.value.form.errors.text;
 
         return ''
     }
