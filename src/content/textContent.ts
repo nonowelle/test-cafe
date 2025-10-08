@@ -47,7 +47,9 @@ export const textContent = {
           lastName: ['please enter a valid last name', 'last name is required'],
           email: ['please enter a valid email', 'email is required'],
           razon: 'please select a reason',
-          text: 'HTML or script content is not allowed'
+          text: 'HTML or script content is not allowed',
+          form: 'Something went wrong. Please try again.',
+          success: 'Thank you! We will get back to you quickly. '
         }
     },
     attendees: {
@@ -101,7 +103,10 @@ export const textContent = {
         lastName: ['por favor, ingrese un apellido válido', 'el apellido es obligatorio'],
         email: ['por favor, ingrese un correo electrónico válido', 'el correo electrónico es obligatorio'],
         razon: 'por favor, seleccione un motivo',
-        text: 'No se permite contenido HTML o scripts'
+        text: 'No se permite contenido HTML o scripts',
+        form: 'Algo salió mal. Por favor, inténtelo de nuevo.',
+        success: '¡Gracias! Nos pondremos en contacto contigo rápidamente.'
+
       }
       
   },

@@ -44,9 +44,9 @@
         </button>
 
         <p v-if="submitOk" style="margin: 0.5rem 0; color: var(--color-links);">
-            Thanks! We received your request.
+            {{ currentContent.form.errors.success }}
         </p>
-        <p v-if="submitError" class="error">Something went wrong. Please try again.</p>
+        <p v-if="submitError" class="error"> {{ currentContent.form.errors.form }}</p>
     </form>
 </template>
 
