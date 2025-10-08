@@ -18,8 +18,9 @@ export const textContent = {
       {
         sectionId: "3",
         title: "i'm in",
-        subtitle: "reserve my spot",
-        description: "next session in october",
+        subtitle: "next session in october",
+        description: "do not miss it",
+        descriptionDeux: "",
         hasForm: true
       }
       
@@ -48,12 +49,12 @@ export const textContent = {
           email: ['please enter a valid email', 'email is required'],
           razon: 'please select a reason',
           text: 'HTML or script content is not allowed',
-          form: 'Something went wrong. Please try again.',
-          success: 'Thank you! We will get back to you quickly. '
+          form: 'something went wrong. please try again.',
+          success: 'thank you! we will get back to you quickly. '
         }
     },
     attendees: {
-      title: "Attendees' List"
+      title: "attendees' list"
     }
   },
   es: {
@@ -75,8 +76,9 @@ export const textContent = {
       {
         sectionId: "3",
         title: "me apunto",
-        subtitle: "reservo mi plaza",
-        description: "próxima sesión en octubre",
+        subtitle:'próxima sesión en octubre',
+        description: "no te lo pierdas",
+        descriptionDeux: "",
         hasForm: true
       }
     ],
@@ -103,9 +105,9 @@ export const textContent = {
         lastName: ['por favor, ingrese un apellido válido', 'el apellido es obligatorio'],
         email: ['por favor, ingrese un correo electrónico válido', 'el correo electrónico es obligatorio'],
         razon: 'por favor, seleccione un motivo',
-        text: 'No se permite contenido HTML o scripts',
-        form: 'Algo salió mal. Por favor, inténtelo de nuevo.',
-        success: '¡Gracias! Nos pondremos en contacto contigo rápidamente.'
+        text: 'no se permite contenido HTML o scripts',
+        form: 'algo salió mal. por favor, inténtelo de nuevo.',
+        success: '¡gracias! nos pondremos en contacto contigo rápidamente.'
 
       }
       
