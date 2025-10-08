@@ -41,7 +41,14 @@ export const textContent = {
         email: "email",
         info: 'i want info',
         estar: 'i want to participate',
-        algo : 'tell us something'
+        algo : 'tell us something',
+        errors: {
+          firstName: ['please enter a valid first name', 'first name is required'],
+          lastName: ['please enter a valid last name', 'last name is required'],
+          email: ['please enter a valid email', 'email is required'],
+          razon: 'please select a reason',
+          text: 'HTML or script content is not allowed'
+        }
     },
     attendees: {
       title: "Attendees' List"
@@ -88,7 +95,15 @@ export const textContent = {
       email: "email",
       info: 'quiero info',
       estar: 'quiero estar',
-      algo : 'cuentanos algo'
+      algo : 'cuentanos algo',
+      errors: {
+        firstName: ['por favor, ingrese un nombre válido', 'el nombre es obligatorio'],
+        lastName: ['por favor, ingrese un apellido válido', 'el apellido es obligatorio'],
+        email: ['por favor, ingrese un correo electrónico válido', 'el correo electrónico es obligatorio'],
+        razon: 'por favor, seleccione un motivo',
+        text: 'No se permite contenido HTML o scripts'
+      }
+      
   },
   attendees: {
     title: "lista de participantes"
