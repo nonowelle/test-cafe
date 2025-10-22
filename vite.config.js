@@ -1,24 +1,28 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
 
+// Use a factory so we can conditionally import plugins safely
+export default defineConfig(async () => {
+  const plugins = [vue()]
 
-export default defineConfig({
-  plugins: [
-    vue(),
-    process.env.NODE_ENV === 'development' && vueDevTools(),
-  ].filter(Boolean),
+  // Only include devtools in dev mode
+  if (process.env.NODE_ENV === 'development') {
+    const { default: vueDevTools } = await import('vite-plugin-vue-devtools')
+    plugins.push(vueDevTools())
+  }
 
-  server: {
-    proxy: {
-      '/form': 'http://localhost:3000'
+  return {
+    plugins,
+    server: {
+      proxy: {
+        '/form': 'http://localhost:3000'
+      },
     },
-  },
-
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      },
     },
-  },
+  }
 })
