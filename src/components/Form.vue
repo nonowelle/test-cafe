@@ -159,11 +159,22 @@ const handleSubmit = async () => {
     submitError.value = false
 
     try {
+        console.log('Submitting form data:', formData)
+        
         const { data, error } = await supabase.functions.invoke('submit-form', {
-            body: formData
+            body: {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                reason: formData.razon,
+                message: formData.text
+            }
         })
 
-        if (error) throw error
+        if (error) {
+            console.error('Supabase function error:', error)
+            throw error
+        }
 
         console.log('Form submitted successfully:', data)
         submitOk.value = true
