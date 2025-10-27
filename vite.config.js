@@ -15,6 +15,7 @@ export default defineConfig(async () => {
   return {
     plugins,
     server: {
+      port: 8080,
       proxy: {
         '/form': 'http://localhost:3000'
       },
