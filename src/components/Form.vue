@@ -54,6 +54,7 @@
 import { reactive, ref, computed } from 'vue'
 import { useLanguage } from '@/composables/useLanguage'
 import { watch } from 'vue'
+import { supabase } from '@/integrations/supabase/client'
 
 
 
@@ -158,15 +159,13 @@ const handleSubmit = async () => {
     submitError.value = false
 
     try {
-
-        const res = await fetch(`/form`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
+        const { data, error } = await supabase.functions.invoke('submit-form', {
+            body: formData
         })
 
-        if (!res.ok) throw new Error('Request failed')
+        if (error) throw error
 
+        console.log('Form submitted successfully:', data)
         submitOk.value = true
         Object.assign(formData, {
             firstName: '',
@@ -176,6 +175,7 @@ const handleSubmit = async () => {
             text: ''
         })
     } catch (e) {
+        console.error('Error submitting form:', e)
         submitError.value = true
     } finally {
         submitting.value = false
