@@ -51,12 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed, onMounted } from 'vue'
 import { useLanguage } from '@/composables/useLanguage'
 import { watch } from 'vue'
 import { supabase } from '@/integrations/supabase/client'
 
-
+// Debug: Check if Supabase client is loaded
+console.log('Form component mounted, Supabase client:', supabase)
+console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL)
 
 const { currentContent } = useLanguage()
 
@@ -152,15 +154,30 @@ const submitOk = ref(false)
 const submitError = ref(false)
 
 const handleSubmit = async () => {
-    if (!validateForm() || submitting.value) return
+    console.log('handleSubmit called')
+    console.log('Form valid:', validateForm())
+    console.log('Submitting:', submitting.value)
+    
+    if (!validateForm() || submitting.value) {
+        console.log('Form validation failed or already submitting')
+        return
+    }
 
     submitting.value = true
     submitOk.value = false
     submitError.value = false
 
     try {
-        console.log('Submitting form data:', formData)
+        console.log('Starting form submission...')
+        console.log('Form data to submit:', {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            reason: formData.razon,
+            message: formData.text
+        })
         
+        console.log('Calling supabase.functions.invoke...')
         const { data, error } = await supabase.functions.invoke('submit-form', {
             body: {
                 firstName: formData.firstName,
@@ -170,6 +187,8 @@ const handleSubmit = async () => {
                 message: formData.text
             }
         })
+
+        console.log('Supabase function response:', { data, error })
 
         if (error) {
             console.error('Supabase function error:', error)
